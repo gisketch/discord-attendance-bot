@@ -1,24 +1,16 @@
-const Discord = require("discord.js");
-
-const client = new Discord.Client();
-
-const prefix = "a!";
-
-client.once("ready", () => {
-  console.log("AoTTG 2 Attendance is ready!");
+const Discord = require('discord.js');
+require('dotenv').config();
+const sched = require('node-schedule');
+const client = new Discord.Client({
+    partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
 });
 
-client.on("message", (message) => {
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
+//Commands Startup
+client.commands = new Discord.Collection();
+client.events = new Discord.Collection();
 
-  const args = message.content.slice(prefix.length).split(/ +/);
-  const command = args.shift().toLowerCase();
-
-  if (command === "ping") {
-    message.channel.send("pong!");
-  }
+['command_handler', 'event_handler'].forEach((handler) => {
+    require(`./handlers/${handler}`)(client, Discord);
 });
 
-client.login(
-  "ODE5NTI1OTMyNjE5NjYxMzQz." + "YEn5AA.V_hGmhmNmfSzpZnBpqkWKa35orA"
-);
+client.login(process.env.DISCORD_TOKEN);
