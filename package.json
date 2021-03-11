@@ -1,0 +1,22 @@
+{
+  "name": "discord-attendance-bot",
+  "version": "1.0.0",
+  "description": "discord bot for aottg 2 server",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gisketch/discord-attendance-bot.git"
+  },
+  "author": "gisketch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gisketch/discord-attendance-bot/issues"
+  },
+  "homepage": "https://github.com/gisketch/discord-attendance-bot#readme",
+  "dependencies": {
+    "discord.js": "^12.5.1"
+  }
+}
