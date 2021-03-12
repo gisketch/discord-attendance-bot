@@ -170,7 +170,9 @@ module.exports = {
                             `Mapping Team Attendance Check for ${args[0]}-2021`
                         )
                         .addFields({
-                            name: `✅ Active Users (${mapActiveLength})`,
+                            name: `✅ Active Users (${
+                                mapResult[mapPage - 1].length
+                            } of ${mapActiveLength})`,
                             value: `${
                                 mapResult[mapPage - 1] === undefined
                                     ? 'None'
@@ -178,7 +180,9 @@ module.exports = {
                             } \n\n`,
                         })
                         .addFields({
-                            name: `❌Inactive Users (${mapInactiveLength})`,
+                            name: `❌Inactive Users (${
+                                iMapResult[mapPage - 1].length
+                            } of ${mapInactiveLength})`,
                             value: `\n ${
                                 iMapResult[mapPage - 1] === undefined
                                     ? 'None'
