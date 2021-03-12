@@ -136,6 +136,7 @@ module.exports = {
 
                 ///// ------- DIVIDING USERS ------ ////
                 const n = 15; //tweak this to add more items per line
+                let mapMaxPage;
 
                 const mapResult = new Array(Math.ceil(uniqMap.length / n))
                     .fill()
@@ -144,6 +145,11 @@ module.exports = {
                 const iMapResult = new Array(Math.ceil(mapInactive.length / n))
                     .fill()
                     .map((_) => mapInactive.splice(0, n));
+
+                if (mapResult.length === undefined)
+                    mapMaxPage = iMapResult.length + 1;
+                if (iMapResult.length === undefined)
+                    mapMaxPage = mapResult.length + 1;
 
                 console.log(mapResult);
                 ////////////////////////////////
@@ -168,7 +174,7 @@ module.exports = {
                                         : iMapResult[args[2] - 1].join(`\n`)
                                 }\n`,
                             })
-                            .setFooter(`Page ${args[2]}`);
+                            .setFooter(`Page ${args[2]} of ${mapMaxPage}`);
                         await message.channel.send(attendanceEmbed);
                     } else {
                         let errorEmbed = new Discord.MessageEmbed()
