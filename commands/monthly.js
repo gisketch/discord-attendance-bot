@@ -5,7 +5,6 @@ module.exports = {
     description: 'Check monthly inactive users',
     async execute(client, message, args, Discord) {
         if (args[0] && args[1]) {
-            let page = 1;
             let month = args[0];
             let attendance = {
                 artTeam: [],
@@ -136,6 +135,7 @@ module.exports = {
 
                 ///// ------- DIVIDING USERS ------ ////
                 const n = 15; //tweak this to add more items per line
+                let mapPage = 1;
                 let mapMaxPage = 1;
 
                 const mapActiveLength = uniqMap.length;
@@ -149,47 +149,59 @@ module.exports = {
                     .fill()
                     .map((_) => mapInactive.splice(0, n));
 
+                console.log(mapResult.length);
+                console.log(iMapResult.length);
+
                 ////////////////////////////////
 
                 // Role checks for the user
-                if (args[1] && args[2]) {
-                    if (args[1] === 'map') {
-                        attendanceEmbed
-                            .setTitle(
-                                `Mapping Team Attendance Check for ${args[0]}-2021`
-                            )
-                            .addFields({
-                                name: `✅ Active Users (${mapActiveLength})`,
-                                value: `${
-                                    mapResult[args[2] - 1] === undefined
-                                        ? 'None'
-                                        : mapResult[args[2] - 1].join(`\n`)
-                                } \n\n`,
-                            })
-                            .addFields({
-                                name: `❌Inactive Users (${mapInactiveLength})`,
-                                value: `\n ${
-                                    iMapResult[args[2] - 1] === undefined
-                                        ? 'None'
-                                        : iMapResult[args[2] - 1].join(`\n`)
-                                }\n`,
-                            })
-                            .setFooter(`Page ${args[2]} of ${mapMaxPage}`);
-                        await message.channel.send(attendanceEmbed);
-                    } else {
-                        let errorEmbed = new Discord.MessageEmbed()
-                            .setTitle('Error')
-                            .setDescription(
-                                'Wrong Team! Here are the list of teams available for checking.'
-                            )
-                            .addFields({
-                                name: 'Teams',
-                                value: 'art\ndev\ntest\nmap\nmod',
-                            })
-                            .setFooter('AoTTG 2 - Attendance Checker')
-                            .setColor('#DD2222');
-                        await message.channel.send(errorEmbed);
-                    }
+                if (args[1] === 'map') {
+                    attendanceEmbed
+                        .setTitle(
+                            `Mapping Team Attendance Check for ${args[0]}-2021`
+                        )
+                        .addFields({
+                            name: `✅ Active Users (${mapActiveLength})`,
+                            value: `${
+                                mapResult[mapPage - 1] === undefined
+                                    ? 'None'
+                                    : mapResult[mapPage - 1].join(`\n`)
+                            } \n\n`,
+                        })
+                        .addFields({
+                            name: `❌Inactive Users (${mapInactiveLength})`,
+                            value: `\n ${
+                                iMapResult[mapPage - 1] === undefined
+                                    ? 'None'
+                                    : iMapResult[mapPage - 1].join(`\n`)
+                            }\n`,
+                        })
+                        .setFooter(`Page ${args[2]} of ${mapMaxPage}`);
+                    let mapEmbed = await message.channel.send(attendanceEmbed);
+
+                    client.on('messageReactionAdd', async (reaction, user) => {
+                        if (reaction.message.partial)
+                            await reaction.message.fetch();
+                        if (reaction.partial) await reaction.fetch();
+                        if (user.bot) return;
+                        if (!reaction.message.guild) return;
+                        if (reaction.emoji.name === '⏭') {
+                            console.log(emoji);
+                        }
+                    });
+                } else {
+                    let errorEmbed = new Discord.MessageEmbed()
+                        .setTitle('Error')
+                        .setDescription(
+                            'Wrong Team! Here are the list of teams available for checking.'
+                        )
+                        .addFields({
+                            name: 'Teams',
+                            value: 'art\ndev\ntest\nmap\nmod',
+                        })
+                        .setFooter('AoTTG 2 - Attendance Checker')
+                        .setColor('#DD2222');
+                    await message.channel.send(errorEmbed);
                 }
             }
         } else {
