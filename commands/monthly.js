@@ -192,12 +192,12 @@ module.exports = {
                     }
 
                     client.on('messageReactionAdd', async (reaction, user) => {
-                        if (reaction.message.partial)
-                            await reaction.message.fetch();
-                        if (reaction.partial) await reaction.fetch();
                         if (user.bot) return;
                         if (!reaction.message.guild) return;
-                        if (reaction.emoji.name === '⏭') {
+                        if (
+                            reaction.emoji.name === '⏭' &&
+                            reaction.message === mapEmbed
+                        ) {
                             mapPage++;
                             reaction.message.reactions.cache
                                 .get('⏭')
@@ -250,7 +250,10 @@ module.exports = {
                             );
                         }
 
-                        if (reaction.emoji.name === '⏮') {
+                        if (
+                            reaction.emoji.name === '⏮' &&
+                            reaction.message === mapEmbed
+                        ) {
                             mapPage--;
                             reaction.message.reactions.cache
                                 .get('⏮')
