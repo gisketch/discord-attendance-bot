@@ -18,4 +18,5 @@ The ✅ react is available for staff members to record their attendance in that 
 # Follow the development of AoTTG-2:
 
 https://github.com/AoTTG-2/AoTTG-2
+
 https://discord.gg/GhbNbvU
