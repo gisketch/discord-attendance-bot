@@ -1,10 +1,11 @@
 const fs = require('fs');
+require('dotenv').config();
 
 module.exports = {
     name: 'attendance',
     description: 'This is the attendance command',
     async execute(client, message, args, Discord) {
-        const channel = '819556333694222366';
+        const channel = process.env.CHANNEL;
         const attendanceChannel = client.channels.cache.get(channel);
         const checkEmoji = '✅';
         const activeCheck = '📝';
@@ -38,7 +39,7 @@ module.exports = {
                 }/${today.getFullYear()}!`
             )
             .setDescription(
-                "It's that time of the month again. React here for attendance!\n\nReact with 📝 if you're a Lead or Team Manager to get a summary of your members' activity\n"
+                "It's that time of the month again. React here for attendance!\n\nReact with ✅ to be register your attendance.\nReact with 📝 if you're a Lead or Team Manager to get a summary of your members' activity.\n"
             )
             .addFields(
                 {
@@ -60,7 +61,18 @@ module.exports = {
             .setFooter(
                 'Source code: github.com/gisketch/discord-attendance-bot'
             )
-            .setTimestamp();
+            .setTimestamp()
+            .setImage('https://i.imgur.com/cbhevsG.png');
+
+        if (quarter === 1) {
+            embed.setThumbnail('https://i.imgur.com/fS9dcf3.png');
+        } else if (quarter === 2) {
+            embed.setThumbnail('https://i.imgur.com/Vpb2PIu.png');
+        } else if (quarter === 3) {
+            embed.setThumbnail('https://i.imgur.com/fX7PHbv.png');
+        } else if (quarter === 4) {
+            embed.setThumbnail('https://i.imgur.com/0fBlV0r.png');
+        }
 
         let messageEmbed = await attendanceChannel.send(embed);
         messageEmbed.react(checkEmoji);
