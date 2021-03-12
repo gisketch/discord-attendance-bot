@@ -144,6 +144,8 @@ module.exports = {
                 const iMapResult = new Array(Math.ceil(mapInactive.length / n))
                     .fill()
                     .map((_) => mapInactive.splice(0, n));
+
+                console.log(mapResult);
                 ////////////////////////////////
 
                 // Role checks for the user
