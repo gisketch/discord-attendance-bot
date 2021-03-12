@@ -49,31 +49,31 @@ module.exports = {
                     if (args[1] === 'art') {
                         attendanceEmbed.addFields({
                             name: 'Art Team',
-                            value: `✅ Active Users: \n ${artTeam}\n\n----------`,
+                            value: `✅ Active Users (${attendance.artTeam.length}): \n ${artTeam}\n\n----------`,
                         });
                         await message.channel.send(attendanceEmbed);
                     } else if (args[1] === 'dev') {
                         attendanceEmbed.addFields({
                             name: 'Development Team',
-                            value: `✅ Active Users: \n ${devTeam}\n\n----------`,
+                            value: `✅ Active Users (${attendance.devTeam.length}): \n ${devTeam}\n\n----------`,
                         });
                         await message.channel.send(attendanceEmbed);
                     } else if (args[1] === 'test') {
                         attendanceEmbed.addFields({
                             name: 'Testing Team',
-                            value: `✅ Active Users: \n ${testTeam}\n\n----------`,
+                            value: `✅ Active Users (${attendance.testTeam.length}): \n ${testTeam}\n\n----------`,
                         });
                         await message.channel.send(attendanceEmbed);
                     } else if (args[1] === 'map') {
                         attendanceEmbed.addFields({
                             name: 'Mapping Team',
-                            value: `✅ Active Users: \n ${mapTeam}\n\n----------`,
+                            value: `✅ Active Users (${attendance.mapTeam.length}): \n ${mapTeam}\n\n----------`,
                         });
                         await message.channel.send(attendanceEmbed);
                     } else if (args[1] === 'mod') {
                         attendanceEmbed.addFields({
                             name: 'Management Team',
-                            value: `✅ Active Users: \n ${modTeam}\n\n----------`,
+                            value: `✅ Active Users (${attendance.modTeam.length}): \n ${modTeam}\n\n----------`,
                         });
                         await message.channel.send(attendanceEmbed);
                     } else {

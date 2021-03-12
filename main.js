@@ -382,7 +382,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
             ) {
                 attendanceEmbed.addFields({
                     name: 'Art Team',
-                    value: `✅ Active Users: \n ${artTeam} \n\n❌Inactive Users: \n ${artInactiveValue}\n\n----------`,
+                    value: `✅ Active Users (${attendance.artTeam.length}): \n ${artTeam} \n\n❌Inactive Users (${artInactive.length}): \n ${artInactiveValue}\n\n----------`,
                 });
                 await user.send(attendanceEmbed);
             }
@@ -391,14 +391,14 @@ client.on('messageReactionAdd', async (reaction, user) => {
             ) {
                 attendanceEmbed.addFields({
                     name: 'Development Team',
-                    value: `✅ Active Users: \n ${devTeam} \n\n❌Inactive Users: \n ${devInactiveValue}\n\n----------`,
+                    value: `✅ Active Users (${attendance.devTeam.length}): \n ${devTeam} \n\n❌Inactive Users (${devInactive.length}): \n ${devInactiveValue}\n\n----------`,
                 });
                 await user.send(attendanceEmbed);
             }
             if (guildMember.roles.cache.some((r) => r.name === 'Lead Tester')) {
                 attendanceEmbed.addFields({
                     name: 'Testing Team',
-                    value: `✅ Active Users: \n ${testTeam} \n\n❌Inactive Users: \n ${testInactiveValue}\n\n----------`,
+                    value: `✅ Active Users (${attendance.testTeam.length}): \n ${testTeam} \n\n❌Inactive Users (${testInactive.length}): \n ${testInactiveValue}\n\n----------`,
                 });
                 await user.send(attendanceEmbed);
             }
@@ -409,7 +409,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
             ) {
                 attendanceEmbed.addFields({
                     name: 'Mapping Team',
-                    value: `✅ Active Users: \n ${mapTeam} \n\n❌Inactive Users: \n ${mapInactiveValue}\n\n----------`,
+                    value: `✅ Active Users (${attendance.mapTeam.length}): \n ${mapTeam} \n\n❌Inactive Users (${mapInactive.length}): \n ${mapInactiveValue}\n\n----------`,
                 });
                 await user.send(attendanceEmbed);
             }
@@ -418,7 +418,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
             ) {
                 attendanceEmbed.addFields({
                     name: 'Management Team',
-                    value: `✅ Active Users: \n ${modTeam} \n\n❌Inactive Users: \n ${modInactiveValue}\n\n----------`,
+                    value: `✅ Active Users (${attendance.modTeam.length}): \n ${modTeam} \n\n❌Inactive Users (${modInactive.length}): \n ${modInactiveValue}\n\n----------`,
                 });
                 await user.send(attendanceEmbed);
             }

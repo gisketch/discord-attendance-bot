@@ -142,31 +142,31 @@ module.exports = {
                     if (args[1] === 'art') {
                         attendanceEmbed.addFields({
                             name: 'Art Team',
-                            value: `❌Inactive Users: \n ${artInactiveValue}\n\n----------`,
+                            value: `❌Inactive Users (${artInactive.length}): \n ${artInactiveValue}\n\n----------`,
                         });
                         await message.channel.send(attendanceEmbed);
                     } else if (args[1] === 'dev') {
                         attendanceEmbed.addFields({
                             name: 'Development Team',
-                            value: `❌Inactive Users: \n ${devInactiveValue}\n\n----------`,
+                            value: `❌Inactive Users (${devInactive.length}): \n ${devInactiveValue}\n\n----------`,
                         });
                         await message.channel.send(attendanceEmbed);
                     } else if (args[1] === 'test') {
                         attendanceEmbed.addFields({
                             name: 'Testing Team',
-                            value: `❌Inactive Users: \n ${testInactiveValue}\n\n----------`,
+                            value: `❌Inactive Users (${testInactive.length}): \n ${testInactiveValue}\n\n----------`,
                         });
                         await message.channel.send(attendanceEmbed);
                     } else if (args[1] === 'map') {
                         attendanceEmbed.addFields({
                             name: 'Mapping Team',
-                            value: `❌Inactive Users: \n ${mapInactiveValue}\n\n----------`,
+                            value: `❌Inactive Users (${mapInactive.length}): \n ${mapInactiveValue}\n\n----------`,
                         });
                         await message.channel.send(attendanceEmbed);
                     } else if (args[1] === 'mod') {
                         attendanceEmbed.addFields({
                             name: 'Management Team',
-                            value: `❌Inactive Users: \n ${modInactiveValue}\n\n----------`,
+                            value: `❌Inactive Users (${modInactive.length}): \n ${modInactiveValue}\n\n----------`,
                         });
                         await message.channel.send(attendanceEmbed);
                     } else {
