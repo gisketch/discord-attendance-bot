@@ -136,7 +136,7 @@ module.exports = {
 
                 ///// ------- DIVIDING USERS ------ ////
                 const n = 15; //tweak this to add more items per line
-                let mapMaxPage;
+                let mapMaxPage = 1;
 
                 const mapResult = new Array(Math.ceil(uniqMap.length / n))
                     .fill()
@@ -151,7 +151,6 @@ module.exports = {
                 if (iMapResult.length === undefined)
                     mapMaxPage = mapResult.length + 1;
 
-                console.log(mapResult);
                 ////////////////////////////////
 
                 // Role checks for the user
