@@ -29,7 +29,7 @@ module.exports = {
                 {
                     name: 'a!monthly',
                     value:
-                        "Check users' inactivit in the set month. \n`usage: a!monthly month team`\n`ex. a!monthly 3 dev`",
+                        "Check users' activity in the set month. \n`usage: a!monthly month team`\n`ex. a!monthly 3 dev`",
                 },
                 {
                     name: 'a!ping',
