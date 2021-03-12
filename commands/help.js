@@ -10,7 +10,7 @@ module.exports = {
                 {
                     name: 'a!attendance',
                     value:
-                        'Updates the attendance message in the attendance channel. Use every 1st, 8th, 15th, and 22nd day of the month or whenever the bot unexpectedly crashes. Automated attendance will be made in the future.',
+                        'Updates the attendance message in the attendance channel. Use every 1st, 8th, 15th, and 22nd day of the month whenever the bot unexpectedly crashes.',
                 },
                 {
                     name: 'a!data',
