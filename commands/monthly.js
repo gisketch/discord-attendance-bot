@@ -219,6 +219,11 @@ module.exports = {
                             if (mapPage < mapMaxPage) {
                                 mapEmbed.react('⏭');
                             }
+                            if (mapPage == mapMaxPage) {
+                                reaction.message.reactions.cache
+                                    .get('⏭')
+                                    .remove(user.id);
+                            }
                         }
                     });
                 } else {
