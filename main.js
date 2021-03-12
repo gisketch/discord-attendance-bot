@@ -140,14 +140,14 @@ client.on('messageReactionAdd', async (reaction, user) => {
 
             // Role checks for the user
             if (guildMember.roles.cache.some((r) => r.name === 'Art Team')) {
-                if (attendance.artTeam.includes(`<@!${user.id}>`)) {
+                if (attendance.artTeam.includes(`<@${user.id}>`)) {
                     await user.send(
                         `You have already checked in for quarter ${quarter} of month ${
                             today.getMonth() + 1
                         }.`
                     );
                 } else {
-                    attendance.artTeam.push(`<@!${user.id}>`);
+                    attendance.artTeam.push(`<@${user.id}>`);
                 }
             }
 
@@ -156,28 +156,28 @@ client.on('messageReactionAdd', async (reaction, user) => {
                     (r) => r.name === 'Development Team'
                 )
             ) {
-                if (attendance.devTeam.includes(`<@!${user.id}>`)) {
+                if (attendance.devTeam.includes(`<@${user.id}>`)) {
                     await user.send(
                         `You have already checked in for quarter ${quarter} of month ${
                             today.getMonth() + 1
                         }.`
                     );
                 } else {
-                    attendance.devTeam.push(`<@!${user.id}>`);
+                    attendance.devTeam.push(`<@${user.id}>`);
                 }
             }
 
             if (
                 guildMember.roles.cache.some((r) => r.name === 'Testing Team')
             ) {
-                if (attendance.testTeam.includes(`<@!${user.id}>`)) {
+                if (attendance.testTeam.includes(`<@${user.id}>`)) {
                     await user.send(
                         `You have already checked in for quarter ${quarter} of month ${
                             today.getMonth() + 1
                         }.`
                     );
                 } else {
-                    attendance.testTeam.push(`<@!${user.id}>`);
+                    attendance.testTeam.push(`<@${user.id}>`);
                 }
             }
 
@@ -186,21 +186,21 @@ client.on('messageReactionAdd', async (reaction, user) => {
                     (r) => r.name === 'Management Team'
                 )
             ) {
-                if (attendance.modTeam.includes(`<@!${user.id}>`)) {
+                if (attendance.modTeam.includes(`<@${user.id}>`)) {
                     await user.send(
                         `You have already checked in for quarter ${quarter} of month ${
                             today.getMonth() + 1
                         }.`
                     );
                 } else {
-                    attendance.modTeam.push(`<@!${user.id}>`);
+                    attendance.modTeam.push(`<@${user.id}>`);
                 }
             }
 
             if (
                 guildMember.roles.cache.some((r) => r.name === 'Mapping Team')
             ) {
-                if (attendance.mapTeam.includes(`<@!${user.id}>`)) {
+                if (attendance.mapTeam.includes(`<@${user.id}>`)) {
                     await user.send(
                         `You have already checked in for quarter ${quarter} of month ${
                             today.getMonth() + 1
@@ -208,7 +208,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
                     );
                     console.log(`${user.id} already is in attendance.`);
                 } else {
-                    attendance.mapTeam.push(`<@!${user.id}>`);
+                    attendance.mapTeam.push(`<@${user.id}>`);
                 }
             }
             ///ROLE CHECK END
@@ -283,7 +283,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
             //-----------ART TEAM-------------//
             const artMembers = reaction.message.guild.roles.cache
                 .find((role) => role.name === 'Art Team')
-                .members.map((m) => `<@!${m.user.id}>`);
+                .members.map((m) => `<@${m.user.id}>`);
 
             const artInactive = attendance.artTeam
                 .filter((x) => !artMembers.includes(x))
@@ -297,7 +297,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
             //-----------DEV TEAM-------------//
             const devMembers = reaction.message.guild.roles.cache
                 .find((role) => role.name === 'Development Team')
-                .members.map((m) => `<@!${m.user.id}>`);
+                .members.map((m) => `<@${m.user.id}>`);
 
             const devInactive = attendance.devTeam
                 .filter((x) => !devMembers.includes(x))
@@ -311,7 +311,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
             //-----------MAP TEAM-------------//
             const mapMembers = reaction.message.guild.roles.cache
                 .find((role) => role.name === 'Mapping Team')
-                .members.map((m) => `<@!${m.user.id}>`);
+                .members.map((m) => `<@${m.user.id}>`);
 
             const mapInactive = attendance.mapTeam
                 .filter((x) => !mapMembers.includes(x))
@@ -325,7 +325,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
             //-----------TEST TEAM-------------//
             const testMembers = reaction.message.guild.roles.cache
                 .find((role) => role.name === 'Testing Team')
-                .members.map((m) => `<@!${m.user.id}>`);
+                .members.map((m) => `<@${m.user.id}>`);
 
             const testInactive = attendance.testTeam
                 .filter((x) => !testMembers.includes(x))
@@ -339,7 +339,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
             //-----------MOD TEAM-------------//
             const modMembers = reaction.message.guild.roles.cache
                 .find((role) => role.name === 'Management Team')
-                .members.map((m) => `<@!${m.user.id}>`);
+                .members.map((m) => `<@${m.user.id}>`);
 
             const modInactive = attendance.modTeam
                 .filter((x) => !modMembers.includes(x))
@@ -442,7 +442,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
                         .setColor('#AA0000')
                         .setTitle('No Permission')
                         .setDescription(
-                            "You have no permission to use this command. Contact <@!221378714099908609> or <@!712437132240617572> if you think something's wrong."
+                            "You have no permission to use this command. Contact <@221378714099908609> or <@712437132240617572> if you think something's wrong."
                         )
                 );
             }

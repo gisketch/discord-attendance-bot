@@ -99,10 +99,10 @@ module.exports = async () => {
                 if (
                     guildMember.roles.cache.some((r) => r.name === 'Art Team')
                 ) {
-                    if (attendance.artTeam.includes(`<@!${user.id}>`)) {
+                    if (attendance.artTeam.includes(`<@${user.id}>`)) {
                         console.log(`${user.id} already is in attendance.`);
                     } else {
-                        attendance.artTeam.push(`<@!${user.id}>`);
+                        attendance.artTeam.push(`<@${user.id}>`);
                     }
                 }
 
@@ -111,10 +111,10 @@ module.exports = async () => {
                         (r) => r.name === 'Development Team'
                     )
                 ) {
-                    if (attendance.devTeam.includes(`<@!${user.id}>`)) {
+                    if (attendance.devTeam.includes(`<@${user.id}>`)) {
                         console.log(`${user.id} already is in attendance.`);
                     } else {
-                        attendance.devTeam.push(`<@!${user.id}>`);
+                        attendance.devTeam.push(`<@${user.id}>`);
                     }
                 }
 
@@ -123,10 +123,10 @@ module.exports = async () => {
                         (r) => r.name === 'Testing Team'
                     )
                 ) {
-                    if (attendance.testTeam.includes(`<@!${user.id}>`)) {
+                    if (attendance.testTeam.includes(`<@${user.id}>`)) {
                         console.log(`${user.id} already is in attendance.`);
                     } else {
-                        attendance.testTeam.push(`<@!${user.id}>`);
+                        attendance.testTeam.push(`<@${user.id}>`);
                     }
                 }
 
@@ -135,10 +135,10 @@ module.exports = async () => {
                         (r) => r.name === 'Management Team'
                     )
                 ) {
-                    if (attendance.modTeam.includes(`<@!${user.id}>`)) {
+                    if (attendance.modTeam.includes(`<@${user.id}>`)) {
                         console.log(`${user.id} already is in attendance.`);
                     } else {
-                        attendance.modTeam.push(`<@!${user.id}>`);
+                        attendance.modTeam.push(`<@${user.id}>`);
                     }
                 }
 
@@ -147,10 +147,10 @@ module.exports = async () => {
                         (r) => r.name === 'Mapping Team'
                     )
                 ) {
-                    if (attendance.mapTeam.includes(`<@!${user.id}>`)) {
+                    if (attendance.mapTeam.includes(`<@${user.id}>`)) {
                         console.log(`${user.id} already is in attendance.`);
                     } else {
-                        attendance.mapTeam.push(`<@!${user.id}>`);
+                        attendance.mapTeam.push(`<@${user.id}>`);
                     }
                 }
                 ///ROLE CHECK END
@@ -209,7 +209,7 @@ module.exports = async () => {
                 //-----------ART TEAM-------------//
                 const artMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Art Team')
-                    .members.map((m) => `<@!${m.user.id}>`);
+                    .members.map((m) => `<@${m.user.id}>`);
 
                 const artInactive = attendance.artTeam
                     .filter((x) => !artMembers.includes(x))
@@ -225,7 +225,7 @@ module.exports = async () => {
                 //-----------DEV TEAM-------------//
                 const devMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Development Team')
-                    .members.map((m) => `<@!${m.user.id}>`);
+                    .members.map((m) => `<@${m.user.id}>`);
 
                 const devInactive = attendance.devTeam
                     .filter((x) => !devMembers.includes(x))
@@ -241,7 +241,7 @@ module.exports = async () => {
                 //-----------MAP TEAM-------------//
                 const mapMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Mapping Team')
-                    .members.map((m) => `<@!${m.user.id}>`);
+                    .members.map((m) => `<@${m.user.id}>`);
 
                 const mapInactive = attendance.mapTeam
                     .filter((x) => !mapMembers.includes(x))
@@ -257,7 +257,7 @@ module.exports = async () => {
                 //-----------TEST TEAM-------------//
                 const testMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Testing Team')
-                    .members.map((m) => `<@!${m.user.id}>`);
+                    .members.map((m) => `<@${m.user.id}>`);
 
                 const testInactive = attendance.testTeam
                     .filter((x) => !testMembers.includes(x))
@@ -275,7 +275,7 @@ module.exports = async () => {
                 //-----------MOD TEAM-------------//
                 const modMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Management Team')
-                    .members.map((m) => `<@!${m.user.id}>`);
+                    .members.map((m) => `<@${m.user.id}>`);
 
                 const modInactive = attendance.modTeam
                     .filter((x) => !modMembers.includes(x))

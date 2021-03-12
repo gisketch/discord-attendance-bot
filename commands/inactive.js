@@ -43,7 +43,7 @@ module.exports = {
                     //-----------ART TEAM-------------//
                     const artMembers = message.guild.roles.cache
                         .find((role) => role.name === 'Art Team')
-                        .members.map((m) => `<@!${m.user.id}>`);
+                        .members.map((m) => `<@${m.user.id}>`);
 
                     const artInactive = attendance.artTeam
                         .filter((x) => !artMembers.includes(x))
@@ -61,7 +61,7 @@ module.exports = {
                     //-----------DEV TEAM-------------//
                     const devMembers = message.guild.roles.cache
                         .find((role) => role.name === 'Development Team')
-                        .members.map((m) => `<@!${m.user.id}>`);
+                        .members.map((m) => `<@${m.user.id}>`);
 
                     const devInactive = attendance.devTeam
                         .filter((x) => !devMembers.includes(x))
@@ -79,7 +79,7 @@ module.exports = {
                     //-----------MAP TEAM-------------//
                     const mapMembers = message.guild.roles.cache
                         .find((role) => role.name === 'Mapping Team')
-                        .members.map((m) => `<@!${m.user.id}>`);
+                        .members.map((m) => `<@${m.user.id}>`);
 
                     const mapInactive = attendance.mapTeam
                         .filter((x) => !mapMembers.includes(x))
@@ -97,7 +97,7 @@ module.exports = {
                     //-----------TEST TEAM-------------//
                     const testMembers = message.guild.roles.cache
                         .find((role) => role.name === 'Testing Team')
-                        .members.map((m) => `<@!${m.user.id}>`);
+                        .members.map((m) => `<@${m.user.id}>`);
 
                     const testInactive = attendance.testTeam
                         .filter((x) => !testMembers.includes(x))
@@ -115,7 +115,7 @@ module.exports = {
                     //-----------MOD TEAM-------------//
                     const modMembers = message.guild.roles.cache
                         .find((role) => role.name === 'Management Team')
-                        .members.map((m) => `<@!${m.user.id}>`);
+                        .members.map((m) => `<@${m.user.id}>`);
 
                     const modInactive = attendance.modTeam
                         .filter((x) => !modMembers.includes(x))

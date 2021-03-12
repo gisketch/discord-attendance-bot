@@ -73,7 +73,7 @@ module.exports = {
                 //-----------ART TEAM-------------//
                 const artMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Art Team')
-                    .members.map((m) => `<@!${m.user.id}>`);
+                    .members.map((m) => `<@${m.user.id}>`);
 
                 const artInactive = uniqArt
                     .filter((x) => !artMembers.includes(x))
@@ -85,7 +85,7 @@ module.exports = {
                 //-----------DEV TEAM-------------//
                 const devMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Development Team')
-                    .members.map((m) => `<@!${m.user.id}>`);
+                    .members.map((m) => `<@${m.user.id}>`);
 
                 const devInactive = uniqDev
                     .filter((x) => !devMembers.includes(x))
@@ -97,7 +97,7 @@ module.exports = {
                 //-----------MAP TEAM-------------//
                 const mapMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Mapping Team')
-                    .members.map((m) => `<@!${m.user.id}>`);
+                    .members.map((m) => `<@${m.user.id}>`);
 
                 const mapInactive = uniqMap
                     .filter((x) => !mapMembers.includes(x))
@@ -109,7 +109,7 @@ module.exports = {
                 //-----------TEST TEAM-------------//
                 const testMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Testing Team')
-                    .members.map((m) => `<@!${m.user.id}>`);
+                    .members.map((m) => `<@${m.user.id}>`);
 
                 const testInactive = uniqTest
                     .filter((x) => !testMembers.includes(x))
@@ -123,7 +123,7 @@ module.exports = {
                 //-----------MOD TEAM-------------//
                 const modMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Management Team')
-                    .members.map((m) => `<@!${m.user.id}>`);
+                    .members.map((m) => `<@${m.user.id}>`);
 
                 const modInactive = uniqMod
                     .filter((x) => !modMembers.includes(x))
