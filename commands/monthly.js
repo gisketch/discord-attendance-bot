@@ -144,35 +144,29 @@ module.exports = {
                         `Here's this quarter of the month's users' activity 🎉`
                     );
 
+                ///// ------- DIVIDING USERS ------ ////
+                const n = 15; //tweak this to add more items per line
+
+                const mapResult = new Array(Math.ceil(uniqMap.length / n))
+                    .fill()
+                    .map((_) => uniqMap.splice(0, n));
+
+                const iMapResult = new Array(Math.ceil(mapInactive.length / n))
+                    .fill()
+                    .map((_) => mapInactive.splice(0, n));
+                ////////////////////////////////
+
                 // Role checks for the user
-                if (args[1] === 'art') {
-                    attendanceEmbed.addFields({
-                        name: 'Art Team',
-                        value: `✅ Active Users (${uniqArt.length}): \n ${artTeam} \n\n❌Inactive Users (${artInactive.length}): \n ${artInactiveValue}\n\n----------`,
-                    });
-                    await message.channel.send(attendanceEmbed);
-                } else if (args[1] === 'dev') {
-                    attendanceEmbed.addFields({
-                        name: 'Development Team',
-                        value: `✅ Active Users (${uniqDev.length}): \n ${devTeam} \n\n❌Inactive Users (${devInactive.length}): \n ${devInactiveValue}\n\n----------`,
-                    });
-                    await message.channel.send(attendanceEmbed);
-                } else if (args[1] === 'test') {
-                    attendanceEmbed.addFields({
-                        name: 'Testing Team',
-                        value: `✅ Active Users (${uniqTest.length}): \n ${testTeam} \n\n❌Inactive Users (${testInactive.length}): \n ${testInactiveValue}\n\n----------`,
-                    });
-                    await message.channel.send(attendanceEmbed);
-                } else if (args[1] === 'map') {
+                if (args[1] === 'map') {
                     attendanceEmbed.addFields({
                         name: 'Mapping Team',
-                        value: `✅ Active Users (${uniqMap.length}): \n ${mapTeam} \n\n❌Inactive Users (${mapInactive.length}): \n ${mapInactiveValue}\n\n----------`,
-                    });
-                    await message.channel.send(attendanceEmbed);
-                } else if (args[1] === 'mod') {
-                    attendanceEmbed.addFields({
-                        name: 'Management Team',
-                        value: `✅ Active Users (${uniqMod.length}): \n ${modTeam} \n\n❌Inactive Users (${modInactive.length}): \n ${modInactiveValue}\n\n----------`,
+                        value: `✅ Active Users (${
+                            uniqMap.length
+                        }): \n ${mapResult[0].join(
+                            `\n`
+                        )} \n\n❌Inactive Users (${mapInactive.length}): \n ${
+                            iMapResult[0]
+                        }\n\n----------`,
                     });
                     await message.channel.send(attendanceEmbed);
                 } else {
