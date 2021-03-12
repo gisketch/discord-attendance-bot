@@ -185,7 +185,7 @@ module.exports = {
                                     : iMapResult[mapPage - 1].join(`\n`)
                             }\n`,
                         })
-                        .setFooter(`Page ${args[2]} of ${mapMaxPage}`);
+                        .setFooter(`Page ${mapPage} of ${mapMaxPage}`);
                     let mapEmbed = await message.channel.send(attendanceEmbed);
                     if (mapPage < mapMaxPage) {
                         mapEmbed.react('⏭');
@@ -198,7 +198,7 @@ module.exports = {
                         if (user.bot) return;
                         if (!reaction.message.guild) return;
                         if (reaction.emoji.name === '⏭') {
-                            console.log('Yay');
+                            await mapEmbed.edit('Next Page');
                         }
                     });
                 } else {
