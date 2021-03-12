@@ -6,7 +6,7 @@ module.exports = {
             .setColor('#22AA22')
             .setTitle('Pong!')
             .setDescription(
-                `🏓Latency is ${Date.now() - message.createdTimestamp}ms.`
+                `🏓Latency is ${message.createdTimestamp - Date.now()} ms.`
             );
 
         await message.channel.send(newEmbed);
