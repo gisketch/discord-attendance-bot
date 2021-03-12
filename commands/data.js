@@ -14,6 +14,11 @@ module.exports = {
             await message.channel.send(embed);
         } catch (err) {
             console.log(err);
+            let embed = new Discord.MessageEmbed()
+                .setTitle('Data check!')
+                .setColor('#AA3333')
+                .setDescription('No data found.');
+            await message.channel.send(embed);
         }
     },
 };
