@@ -198,7 +198,37 @@ module.exports = {
                         if (user.bot) return;
                         if (!reaction.message.guild) return;
                         if (reaction.emoji.name === '⏭') {
-                            await mapEmbed.edit('Next Page');
+                            mapPage++;
+                            await mapEmbed.edit(
+                                attendanceEmbed
+                                    .setTitle(
+                                        `Mapping Team Attendance Check for ${args[0]}-2021`
+                                    )
+                                    .addFields({
+                                        name: `✅ Active Users (${mapActiveLength})`,
+                                        value: `${
+                                            mapResult[mapPage - 1] === undefined
+                                                ? 'None'
+                                                : mapResult[mapPage - 1].join(
+                                                      `\n`
+                                                  )
+                                        } \n\n`,
+                                    })
+                                    .addFields({
+                                        name: `❌Inactive Users (${mapInactiveLength})`,
+                                        value: `\n ${
+                                            iMapResult[mapPage - 1] ===
+                                            undefined
+                                                ? 'None'
+                                                : iMapResult[mapPage - 1].join(
+                                                      `\n`
+                                                  )
+                                        }\n`,
+                                    })
+                                    .setFooter(
+                                        `Page ${mapPage} of ${mapMaxPage}`
+                                    )
+                            );
                         }
                     });
                 } else {
