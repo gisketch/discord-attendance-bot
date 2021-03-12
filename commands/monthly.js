@@ -170,9 +170,7 @@ module.exports = {
                             `Mapping Team Attendance Check for ${args[0]}-2021`
                         )
                         .addFields({
-                            name: `✅ Active Users (${
-                                mapResult[mapPage - 1].length
-                            } of ${mapActiveLength})`,
+                            name: `✅ Active Users (${mapActiveLength})`,
                             value: `${
                                 mapResult[mapPage - 1] === undefined
                                     ? 'None'
@@ -180,9 +178,7 @@ module.exports = {
                             } \n\n`,
                         })
                         .addFields({
-                            name: `❌Inactive Users (${
-                                iMapResult[mapPage - 1].length
-                            } of ${mapInactiveLength})`,
+                            name: `❌Inactive Users (${mapInactiveLength})`,
                             value: `\n ${
                                 iMapResult[mapPage - 1] === undefined
                                     ? 'None'
@@ -217,38 +213,92 @@ module.exports = {
                                 reaction.message.reactions.cache
                                     .get('⏭')
                                     .remove(user.id);
+                            } else {
+                                attendanceEmbed.fields = [];
+                                await mapEmbed.edit(
+                                    attendanceEmbed
+                                        .addFields({
+                                            name: `✅ Active Users (${mapActiveLength})`,
+                                            value: `${
+                                                mapResult[mapPage - 1] ===
+                                                undefined
+                                                    ? 'None'
+                                                    : mapResult[
+                                                          mapPage - 1
+                                                      ].join(`\n`)
+                                            } \n\n`,
+                                        })
+                                        .addFields({
+                                            name: `❌Inactive Users (${mapInactiveLength})`,
+                                            value: `\n ${
+                                                iMapResult[mapPage - 1] ===
+                                                undefined
+                                                    ? 'None'
+                                                    : iMapResult[
+                                                          mapPage - 1
+                                                      ].join(`\n`)
+                                            }\n`,
+                                        })
+                                        .setTitle(
+                                            `Mapping Team Attendance Check for ${args[0]}-2021`
+                                        )
+                                        .setFooter(
+                                            `Page ${mapPage} of ${mapMaxPage}`
+                                        )
+                                );
                             }
-                            attendanceEmbed.fields = [];
-                            await mapEmbed.edit(
-                                attendanceEmbed
-                                    .addFields({
-                                        name: `✅ Active Users (${mapActiveLength})`,
-                                        value: `${
-                                            mapResult[mapPage - 1] === undefined
-                                                ? 'None'
-                                                : mapResult[mapPage - 1].join(
-                                                      `\n`
-                                                  )
-                                        } \n\n`,
-                                    })
-                                    .addFields({
-                                        name: `❌Inactive Users (${mapInactiveLength})`,
-                                        value: `\n ${
-                                            iMapResult[mapPage - 1] ===
-                                            undefined
-                                                ? 'None'
-                                                : iMapResult[mapPage - 1].join(
-                                                      `\n`
-                                                  )
-                                        }\n`,
-                                    })
-                                    .setTitle(
-                                        `Mapping Team Attendance Check for ${args[0]}-2021`
-                                    )
-                                    .setFooter(
-                                        `Page ${mapPage} of ${mapMaxPage}`
-                                    )
-                            );
+                        }
+
+                        if (reaction.emoji.name === '⏮') {
+                            mapPage--;
+                            reaction.message.reactions.cache
+                                .get('⏮')
+                                .users.remove(user.id);
+
+                            if (mapPage > 1) {
+                                mapEmbed.react('⏮');
+                            }
+                            if (mapPage < mapMaxPage) {
+                                mapEmbed.react('⏭');
+                            }
+                            if (mapPage == 1) {
+                                reaction.message.reactions.cache
+                                    .get('⏮')
+                                    .remove(user.id);
+                            } else {
+                                attendanceEmbed.fields = [];
+                                await mapEmbed.edit(
+                                    attendanceEmbed
+                                        .addFields({
+                                            name: `✅ Active Users (${mapActiveLength})`,
+                                            value: `${
+                                                mapResult[mapPage - 1] ===
+                                                undefined
+                                                    ? 'None'
+                                                    : mapResult[
+                                                          mapPage - 1
+                                                      ].join(`\n`)
+                                            } \n\n`,
+                                        })
+                                        .addFields({
+                                            name: `❌Inactive Users (${mapInactiveLength})`,
+                                            value: `\n ${
+                                                iMapResult[mapPage - 1] ===
+                                                undefined
+                                                    ? 'None'
+                                                    : iMapResult[
+                                                          mapPage - 1
+                                                      ].join(`\n`)
+                                            }\n`,
+                                        })
+                                        .setTitle(
+                                            `Mapping Team Attendance Check for ${args[0]}-2021`
+                                        )
+                                        .setFooter(
+                                            `Page ${mapPage} of ${mapMaxPage}`
+                                        )
+                                );
+                            }
                         }
                     });
                 } else {
