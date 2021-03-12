@@ -40,7 +40,7 @@ module.exports = {
                     }/${today.getFullYear()}!`
                 )
                 .setDescription(
-                    "It's that time of the month again. React here for attendance!\n\nReact with ✅ to be register your attendance.\nReact with 📔 if you're a Lead or Team Manager to get a summary of your members' activity.\n"
+                    "It's that time of the month again. React here for attendance!\n\nReact with ✅ to register your attendance.\nReact with 📔 if you're a Lead or Team Manager to get a summary of your members' activity.\n"
                 )
                 .addFields(
                     {
