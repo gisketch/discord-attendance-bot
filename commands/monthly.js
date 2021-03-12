@@ -138,6 +138,9 @@ module.exports = {
                 const n = 15; //tweak this to add more items per line
                 let mapMaxPage = 1;
 
+                const mapActiveLength = uniqMap.length;
+                const mapInactiveLength = mapInactive.length;
+
                 const mapResult = new Array(Math.ceil(uniqMap.length / n))
                     .fill()
                     .map((_) => uniqMap.splice(0, n));
@@ -145,11 +148,6 @@ module.exports = {
                 const iMapResult = new Array(Math.ceil(mapInactive.length / n))
                     .fill()
                     .map((_) => mapInactive.splice(0, n));
-
-                if (mapResult.length === undefined)
-                    mapMaxPage = iMapResult.length + 1;
-                if (iMapResult.length === undefined)
-                    mapMaxPage = mapResult.length + 1;
 
                 ////////////////////////////////
 
@@ -161,7 +159,7 @@ module.exports = {
                                 `Mapping Team Attendance Check for ${args[0]}-2021`
                             )
                             .addFields({
-                                name: `✅ Active Users (${uniqMap.length})`,
+                                name: `✅ Active Users (${mapActiveLength})`,
                                 value: `${
                                     mapResult[args[2] - 1] === undefined
                                         ? 'None'
@@ -169,7 +167,7 @@ module.exports = {
                                 } \n\n`,
                             })
                             .addFields({
-                                name: `❌Inactive Users (${mapInactive.length})`,
+                                name: `❌Inactive Users (${mapInactiveLength})`,
                                 value: `\n ${
                                     iMapResult[args[2] - 1] === undefined
                                         ? 'None'
