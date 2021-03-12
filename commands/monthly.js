@@ -68,11 +68,11 @@ module.exports = {
                     .filter((x) => !artMembers.includes(x))
                     .concat(artMembers.filter((x) => !uniqArt.includes(x)));
 
-                console.log(artMembers);
-                // console.log(uniqArt);
-                // console.log(artInactive);
-                const artInactiveValue =
-                    artInactive.length === 0 ? `None` : artInactive.join(`\n`);
+                const artInactivity = artMembers.filter(
+                    (x1) => !uniqArt.some((x2) => x2 === x1)
+                );
+
+                console.log(artInactivity);
 
                 //-----------DEV TEAM-------------//
                 const devMembers = message.guild.roles.cache
@@ -83,9 +83,6 @@ module.exports = {
                     .filter((x) => !devMembers.includes(x))
                     .concat(devMembers.filter((x) => !uniqDev.includes(x)));
 
-                const devInactiveValue =
-                    devInactive.length === 0 ? `None` : devInactive.join(`\n`);
-
                 //-----------MAP TEAM-------------//
                 const mapMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Mapping Team')
@@ -94,9 +91,6 @@ module.exports = {
                 const mapInactive = uniqMap
                     .filter((x) => !mapMembers.includes(x))
                     .concat(mapMembers.filter((x) => !uniqMap.includes(x)));
-
-                const mapInactiveValue =
-                    mapInactive.length === 0 ? `None` : mapInactive.join(`\n`);
 
                 //-----------TEST TEAM-------------//
                 const testMembers = message.guild.roles.cache
@@ -107,11 +101,6 @@ module.exports = {
                     .filter((x) => !testMembers.includes(x))
                     .concat(testMembers.filter((x) => !uniqTest.includes(x)));
 
-                const testInactiveValue =
-                    testInactive.length === 0
-                        ? `None`
-                        : testInactive.join(`\n`);
-
                 //-----------MOD TEAM-------------//
                 const modMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Management Team')
@@ -120,9 +109,6 @@ module.exports = {
                 const modInactive = uniqMod
                     .filter((x) => !modMembers.includes(x))
                     .concat(modMembers.filter((x) => !uniqMod.includes(x)));
-
-                const modInactiveValue =
-                    modInactive.length === 0 ? `None` : modInactive.join(`\n`);
 
                 // ---- MAKING EMBEDS ------ //
                 let attendanceEmbed = new Discord.MessageEmbed()
