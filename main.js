@@ -373,54 +373,78 @@ client.on('messageReactionAdd', async (reaction, user) => {
             if (
                 guildMember.roles.cache.some(
                     (r) =>
-                        r.name === 'Art Team Manager' ||
-                        r.name === 'Lead Animator' ||
-                        r.name === 'Lead Composer' ||
-                        r.name === 'Lead 3D Artist' ||
-                        r.name === 'Lead 2D Artists'
+                        r.name.startsWith('Lead') ||
+                        r.name.endsWith('Manager') ||
+                        r.name.startsWith('Head')
                 )
             ) {
-                attendanceEmbed.addFields({
-                    name: 'Art Team',
-                    value: `✅ Active Users (${attendance.artTeam.length}): \n ${artTeam} \n\n❌Inactive Users (${artInactive.length}): \n ${artInactiveValue}\n\n----------`,
-                });
+                if (
+                    guildMember.roles.cache.some(
+                        (r) =>
+                            r.name === 'Art Team Manager' ||
+                            r.name === 'Lead Animator' ||
+                            r.name === 'Lead Composer' ||
+                            r.name === 'Lead 3D Artist' ||
+                            r.name === 'Lead 2D Artists'
+                    )
+                ) {
+                    attendanceEmbed.addFields({
+                        name: 'Art Team',
+                        value: `✅ Active Users (${attendance.artTeam.length}): \n ${artTeam} \n\n❌Inactive Users (${artInactive.length}): \n ${artInactiveValue}\n\n----------`,
+                    });
+                }
+                if (
+                    guildMember.roles.cache.some(
+                        (r) => r.name === 'Lead Developer'
+                    )
+                ) {
+                    attendanceEmbed.addFields({
+                        name: 'Development Team',
+                        value: `✅ Active Users (${attendance.devTeam.length}): \n ${devTeam} \n\n❌Inactive Users (${devInactive.length}): \n ${devInactiveValue}\n\n----------`,
+                    });
+                }
+                if (
+                    guildMember.roles.cache.some(
+                        (r) =>
+                            r.name === 'Lead Tester' ||
+                            r.name === 'Testing Team Manager'
+                    )
+                ) {
+                    attendanceEmbed.addFields({
+                        name: 'Testing Team',
+                        value: `✅ Active Users (${attendance.testTeam.length}): \n ${testTeam} \n\n❌Inactive Users (${testInactive.length}): \n ${testInactiveValue}\n\n----------`,
+                    });
+                }
+                if (
+                    guildMember.roles.cache.some(
+                        (r) => r.name === 'Mapping Manager'
+                    )
+                ) {
+                    attendanceEmbed.addFields({
+                        name: 'Mapping Team',
+                        value: `✅ Active Users (${attendance.mapTeam.length}): \n ${mapTeam} \n\n❌Inactive Users (${mapInactive.length}): \n ${mapInactiveValue}\n\n----------`,
+                    });
+                }
+                if (
+                    guildMember.roles.cache.some(
+                        (r) => r.name === 'Head Moderator'
+                    )
+                ) {
+                    attendanceEmbed.addFields({
+                        name: 'Management Team',
+                        value: `✅ Active Users (${attendance.modTeam.length}): \n ${modTeam} \n\n❌Inactive Users (${modInactive.length}): \n ${modInactiveValue}\n\n----------`,
+                    });
+                }
                 await user.send(attendanceEmbed);
-            }
-            if (
-                guildMember.roles.cache.some((r) => r.name === 'Lead Developer')
-            ) {
-                attendanceEmbed.addFields({
-                    name: 'Development Team',
-                    value: `✅ Active Users (${attendance.devTeam.length}): \n ${devTeam} \n\n❌Inactive Users (${devInactive.length}): \n ${devInactiveValue}\n\n----------`,
-                });
-                await user.send(attendanceEmbed);
-            }
-            if (guildMember.roles.cache.some((r) => r.name === 'Lead Tester')) {
-                attendanceEmbed.addFields({
-                    name: 'Testing Team',
-                    value: `✅ Active Users (${attendance.testTeam.length}): \n ${testTeam} \n\n❌Inactive Users (${testInactive.length}): \n ${testInactiveValue}\n\n----------`,
-                });
-                await user.send(attendanceEmbed);
-            }
-            if (
-                guildMember.roles.cache.some(
-                    (r) => r.name === 'Mapping Manager'
-                )
-            ) {
-                attendanceEmbed.addFields({
-                    name: 'Mapping Team',
-                    value: `✅ Active Users (${attendance.mapTeam.length}): \n ${mapTeam} \n\n❌Inactive Users (${mapInactive.length}): \n ${mapInactiveValue}\n\n----------`,
-                });
-                await user.send(attendanceEmbed);
-            }
-            if (
-                guildMember.roles.cache.some((r) => r.name === 'Head Moderator')
-            ) {
-                attendanceEmbed.addFields({
-                    name: 'Management Team',
-                    value: `✅ Active Users (${attendance.modTeam.length}): \n ${modTeam} \n\n❌Inactive Users (${modInactive.length}): \n ${modInactiveValue}\n\n----------`,
-                });
-                await user.send(attendanceEmbed);
+            } else {
+                await user.send(
+                    new Discord.MessageEmbed()
+                        .setColor('#AA0000')
+                        .setTitle('No Permission')
+                        .setDescription(
+                            "You have no permission to use this command. Contact <@!221378714099908609> or <@!712437132240617572> if you think something's wrong."
+                        )
+                );
             }
         }
     } else {
