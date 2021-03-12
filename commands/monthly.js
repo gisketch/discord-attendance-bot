@@ -211,10 +211,8 @@ module.exports = {
 
                             reaction.message.reactions.cache
                                 .get('⏭')
-                                .remove(user);
-                            reaction.message.reactions.cache
-                                .get('⏮')
-                                .remove(user);
+                                .remove(user.id);
+
                             if (mapPage > 1) {
                                 mapEmbed.react('⏮');
                             }
