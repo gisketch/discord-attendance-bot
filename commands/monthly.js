@@ -64,11 +64,7 @@ module.exports = {
                     .find((role) => role.name === 'Art Team')
                     .members.map((m) => `<@${m.user.id}>`);
 
-                const artInactive = uniqArt
-                    .filter((x) => !artMembers.includes(x))
-                    .concat(artMembers.filter((x) => !uniqArt.includes(x)));
-
-                const artInactivity = artMembers.filter(
+                const artInactive = artMembers.filter(
                     (x1) => !uniqArt.some((x2) => x2 === x1)
                 );
 
@@ -79,36 +75,36 @@ module.exports = {
                     .find((role) => role.name === 'Development Team')
                     .members.map((m) => `<@${m.user.id}>`);
 
-                const devInactive = uniqDev
-                    .filter((x) => !devMembers.includes(x))
-                    .concat(devMembers.filter((x) => !uniqDev.includes(x)));
+                const devInactive = devMembers.filter(
+                    (x1) => !uniqDev.some((x2) => x2 === x1)
+                );
 
                 //-----------MAP TEAM-------------//
                 const mapMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Mapping Team')
                     .members.map((m) => `<@${m.user.id}>`);
 
-                const mapInactive = uniqMap
-                    .filter((x) => !mapMembers.includes(x))
-                    .concat(mapMembers.filter((x) => !uniqMap.includes(x)));
+                const mapInactive = mapMembers.filter(
+                    (x1) => !uniqMap.some((x2) => x2 === x1)
+                );
 
                 //-----------TEST TEAM-------------//
                 const testMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Testing Team')
                     .members.map((m) => `<@${m.user.id}>`);
 
-                const testInactive = uniqTest
-                    .filter((x) => !testMembers.includes(x))
-                    .concat(testMembers.filter((x) => !uniqTest.includes(x)));
+                const testInactive = testMembers.filter(
+                    (x1) => !uniqTest.some((x2) => x2 === x1)
+                );
 
                 //-----------MOD TEAM-------------//
                 const modMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Management Team')
                     .members.map((m) => `<@${m.user.id}>`);
 
-                const modInactive = uniqMod
-                    .filter((x) => !modMembers.includes(x))
-                    .concat(modMembers.filter((x) => !uniqMod.includes(x)));
+                const modInactive = modMembers.filter(
+                    (x1) => !uniqMod.some((x2) => x2 === x1)
+                );
 
                 // ---- MAKING EMBEDS ------ //
                 let attendanceEmbed = new Discord.MessageEmbed()
