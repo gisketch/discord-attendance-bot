@@ -297,6 +297,7 @@ module.exports = {
                     if (artPage < artMaxPage) {
                         artEmbed.react('⏭');
                     }
+                    artEmbed.react('✅');
 
                     client.on('messageReactionAdd', async (reaction, user) => {
                         if (user.bot) return;
@@ -412,6 +413,12 @@ module.exports = {
                                     )
                             );
                         }
+                        if (
+                            reaction.emoji.name === '✅' &&
+                            reaction.message === artEmbed
+                        ) {
+                            artEmbed.delete();
+                        }
                     });
                 } else if (args[1] === 'dev') {
                     attendanceEmbed
@@ -439,6 +446,7 @@ module.exports = {
                     if (devPage < devMaxPage) {
                         devEmbed.react('⏭');
                     }
+                    devEmbed.react('✅');
 
                     client.on('messageReactionAdd', async (reaction, user) => {
                         if (user.bot) return;
@@ -554,6 +562,12 @@ module.exports = {
                                     )
                             );
                         }
+                        if (
+                            reaction.emoji.name === '✅' &&
+                            reaction.message === devEmbed
+                        ) {
+                            devEmbed.delete();
+                        }
                     });
                 } else if (args[1] === 'test') {
                     attendanceEmbed
@@ -581,6 +595,7 @@ module.exports = {
                     if (testPage < testMaxPage) {
                         testEmbed.react('⏭');
                     }
+                    testEmbed.react('✅');
 
                     client.on('messageReactionAdd', async (reaction, user) => {
                         if (user.bot) return;
@@ -698,6 +713,12 @@ module.exports = {
                                     )
                             );
                         }
+                        if (
+                            reaction.emoji.name === '✅' &&
+                            reaction.message === testEmbed
+                        ) {
+                            testEmbed.delete();
+                        }
                     });
                 } else if (args[1] === 'map') {
                     attendanceEmbed
@@ -725,6 +746,7 @@ module.exports = {
                     if (mapPage < mapMaxPage) {
                         mapEmbed.react('⏭');
                     }
+                    mapEmbed.react('✅');
 
                     client.on('messageReactionAdd', async (reaction, user) => {
                         if (user.bot) return;
@@ -840,6 +862,12 @@ module.exports = {
                                     )
                             );
                         }
+                        if (
+                            reaction.emoji.name === '✅' &&
+                            reaction.message === mapEmbed
+                        ) {
+                            mapEmbed.delete();
+                        }
                     });
                 } else if (args[1] === 'mod') {
                     attendanceEmbed
@@ -867,6 +895,7 @@ module.exports = {
                     if (modPage < modMaxPage) {
                         modEmbed.react('⏭');
                     }
+                    modEmbed.react('✅');
 
                     client.on('messageReactionAdd', async (reaction, user) => {
                         if (user.bot) return;
@@ -981,6 +1010,12 @@ module.exports = {
                                         `Page ${modPage} of ${modMaxPage}`
                                     )
                             );
+                        }
+                        if (
+                            reaction.emoji.name === '✅' &&
+                            reaction.message === modEmbed
+                        ) {
+                            modEmbed.delete();
                         }
                     });
                 } else {
