@@ -68,6 +68,8 @@ module.exports = {
                     .filter((x) => !artMembers.includes(x))
                     .concat(artMembers.filter((x) => !uniqArt.includes(x)));
 
+                console.log(artMembers);
+                console.log(artInactive);
                 const artInactiveValue =
                     artInactive.length === 0 ? `None` : artInactive.join(`\n`);
 
