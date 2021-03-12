@@ -214,7 +214,7 @@ module.exports = {
                                     .get('⏭')
                                     .remove(user.id);
                             }
-                            mapEmbed.fields = [];
+                            attendanceEmbed.fields = [];
                             await mapEmbed.edit(
                                 attendanceEmbed
                                     .addFields({
