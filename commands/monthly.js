@@ -158,17 +158,20 @@ module.exports = {
                 if (args[1] && args[2]) {
                     if (args[1] === 'map') {
                         attendanceEmbed
+                            .setTitle(
+                                `Mapping Team Attendance Check for ${args[0]}-2021`
+                            )
                             .addFields({
-                                name: 'Mapping Team',
-                                value: `✅ Active Users (${
-                                    uniqMap.length
-                                }): \n ${
+                                name: `✅ Active Users (${uniqMap.length})`,
+                                value: `${
                                     mapResult[args[2] - 1] === undefined
                                         ? 'None'
                                         : mapResult[args[2] - 1].join(`\n`)
-                                } \n\n❌Inactive Users (${
-                                    mapInactive.length
-                                }): \n ${
+                                } \n\n`,
+                            })
+                            .addFields({
+                                name: `❌Inactive Users (${mapInactive.length})`,
+                                value: `\n ${
                                     iMapResult[args[2] - 1] === undefined
                                         ? 'None'
                                         : iMapResult[args[2] - 1].join(`\n`)
