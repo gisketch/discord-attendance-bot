@@ -5,27 +5,50 @@ module.exports = {
     description: 'This is the attendance command',
     async execute(client, message, args, Discord) {
         const channel = '819556333694222366';
+        const attendanceChannel = client.channels.cache.get(channel);
         const checkEmoji = '✅';
         const activeCheck = '📝';
         //CLEAR MSGS
         message.delete();
+        attendanceChannel.bulkDelete(99);
         /////////
         let today = new Date();
+        let quarter;
+        Number.prototype.between = function (a, b) {
+            var min = Math.min.apply(Math, [a, b]),
+                max = Math.max.apply(Math, [a, b]);
+            return this >= min && this < max;
+        };
+
+        if (today.getDate().between(1, 8)) {
+            quarter = 1;
+        } else if (today.getDate().between(8, 15)) {
+            quarter = 2;
+        } else if (today.getDate().between(15, 22)) {
+            quarter = 3;
+        } else if (today.getDate().between(22, 32)) {
+            quarter = 4;
+        }
 
         let embed = new Discord.MessageEmbed()
             .setColor('#aaffaa')
             .setTitle(
-                `Attendance Check for ${
+                `Attendance Check for Quarter ${quarter} of ${
                     today.getMonth() + 1
                 }/${today.getFullYear()}!`
             )
             .setDescription(
-                "It's that time of the week again. React here for attendance!"
+                "It's that time of the month again. React here for attendance!\n\nReact with 📝 if you're a Lead or Team Manager to get a summary of your members' activity\n"
             )
             .addFields(
                 {
                     name: 'Month',
                     value: today.getMonth() + 1,
+                    inline: true,
+                },
+                {
+                    name: 'Quarter',
+                    value: quarter,
                     inline: true,
                 },
                 {
@@ -35,19 +58,17 @@ module.exports = {
                 }
             )
             .setFooter(
-                "React with 📝 if you're a Lead or Team Manager to get a summary of your members' activity"
+                'Source code: github.com/gisketch/discord-attendance-bot'
             )
             .setTimestamp();
 
-        let messageEmbed = await client.channels.cache
-            .get('819556333694222366')
-            .send(embed);
+        let messageEmbed = await attendanceChannel.send(embed);
         messageEmbed.react(checkEmoji);
         messageEmbed.react(activeCheck);
 
         const fileName = `${
             today.getMonth() + 1
-        }-${today.getFullYear()}-ActivityData`;
+        }-${quarter}-${today.getFullYear()}-ActivityData`;
 
         client.on('messageReactionAdd', async (reaction, user) => {
             if (reaction.message.partial) await reaction.message.fetch();
@@ -289,34 +310,83 @@ module.exports = {
                     // ---- MAKING EMBEDS ------ //
                     let attendanceEmbed = new Discord.MessageEmbed()
                         .setColor(`#aaEEaa`)
-                        .setTitle(`Attendance Check!`)
-                        .setDescription(`Here's this week's users' activity 🎉`)
-                        .addFields(
-                            {
-                                name: 'Art Team',
-                                value: `✅ Active Users: \n ${artTeam} \n\n❌Inactive Users: \n ${artInactiveValue}\n\n----------`,
-                            },
-                            {
-                                name: 'Development Team',
-                                value: `✅ Active Users: \n ${devTeam} \n\n❌Inactive Users: \n ${devInactiveValue}\n\n----------`,
-                            },
-                            {
-                                name: 'Testing Team',
-                                value: `✅ Active Users: \n ${testTeam} \n\n❌Inactive Users: \n ${testInactiveValue}\n\n----------`,
-                            },
-                            {
-                                name: 'Mapping Team',
-                                value: `✅ Active Users: \n ${mapTeam} \n\n❌Inactive Users: \n ${mapInactiveValue}\n\n----------`,
-                            },
-                            {
-                                name: 'Mod Team',
-                                value: `✅ Active Users: \n ${modTeam} \n\n❌Inactive Users: \n ${modInactiveValue}\n\n----------`,
-                            }
+                        .setTitle(
+                            `Attendance Check for ${
+                                today.getMonth() + 1
+                            }-${quarter}-${today.getFullYear()}!`
+                        )
+                        .setDescription(
+                            `Here's this quarter of the month's users' activity 🎉`
                         );
 
                     messageEmbed.reactions.cache.get(activeCheck).remove(user);
                     messageEmbed.react(activeCheck);
-                    await user.send(attendanceEmbed);
+
+                    const guildMember = reaction.message.guild.members.cache.find(
+                        (member) => member.id === user.id
+                    );
+
+                    // Role checks for the user
+                    if (
+                        guildMember.roles.cache.some(
+                            (r) =>
+                                r.name === 'Art Team Manager' ||
+                                r.name === 'Lead Animator' ||
+                                r.name === 'Lead Composer' ||
+                                r.name === 'Lead 3D Artist' ||
+                                r.name === 'Lead 2D Artists'
+                        )
+                    ) {
+                        attendanceEmbed.addFields({
+                            name: 'Art Team',
+                            value: `✅ Active Users: \n ${artTeam} \n\n❌Inactive Users: \n ${artInactiveValue}\n\n----------`,
+                        });
+                        await user.send(attendanceEmbed);
+                    }
+                    if (
+                        guildMember.roles.cache.some(
+                            (r) => r.name === 'Lead Developer'
+                        )
+                    ) {
+                        attendanceEmbed.addFields({
+                            name: 'Development Team',
+                            value: `✅ Active Users: \n ${devTeam} \n\n❌Inactive Users: \n ${devInactiveValue}\n\n----------`,
+                        });
+                        await user.send(attendanceEmbed);
+                    }
+                    if (
+                        guildMember.roles.cache.some(
+                            (r) => r.name === 'Lead Tester'
+                        )
+                    ) {
+                        attendanceEmbed.addFields({
+                            name: 'Testing Team',
+                            value: `✅ Active Users: \n ${testTeam} \n\n❌Inactive Users: \n ${testInactiveValue}\n\n----------`,
+                        });
+                        await user.send(attendanceEmbed);
+                    }
+                    if (
+                        guildMember.roles.cache.some(
+                            (r) => r.name === 'Mapping Manager'
+                        )
+                    ) {
+                        attendanceEmbed.addFields({
+                            name: 'Mapping Team',
+                            value: `✅ Active Users: \n ${mapTeam} \n\n❌Inactive Users: \n ${mapInactiveValue}\n\n----------`,
+                        });
+                        await user.send(attendanceEmbed);
+                    }
+                    if (
+                        guildMember.roles.cache.some(
+                            (r) => r.name === 'Head Moderator'
+                        )
+                    ) {
+                        attendanceEmbed.addFields({
+                            name: 'Management Team',
+                            value: `✅ Active Users: \n ${modTeam} \n\n❌Inactive Users: \n ${modInactiveValue}\n\n----------`,
+                        });
+                        await user.send(attendanceEmbed);
+                    }
                 }
             } else {
                 return;

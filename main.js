@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
+const fs = require('fs');
 require('dotenv').config();
-const sched = require('node-schedule');
+const cron = require('cron');
 const client = new Discord.Client({
     partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
 });
