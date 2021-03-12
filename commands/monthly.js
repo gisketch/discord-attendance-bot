@@ -129,12 +129,37 @@ module.exports = {
                             args[0]
                         }-${new Date().getFullYear()}!`
                     )
-                    .setDescription(
-                        `Here's this quarter of the month's users' activity 🎉`
-                    );
+                    .setDescription(`Here's this month's users' activity 🎉`);
 
                 ///// ------- DIVIDING USERS ------ ////
                 const n = 15; //tweak this to add more items per line
+                /////-------ART----------/////
+                let artPage = 1;
+                let artMaxPage = 1;
+
+                const artActiveLength = uniqArt.length;
+                const artInactiveLength = artInactive.length;
+
+                const artResult = new Array(Math.ceil(uniqArt.length / n))
+                    .fill()
+                    .map((_) => uniqArt.splice(0, n));
+
+                const iArtResult = new Array(Math.ceil(artInactive.length / n))
+                    .fill()
+                    .map((_) => artInactive.splice(0, n));
+
+                if (artResult.length === 0) {
+                    artMaxPage = iArtResult.length;
+                } else if (iArtResult.length === 0) {
+                    artMaxPage = artResult.length;
+                } else if (artResult.length > iArtResult.length) {
+                    artMaxPage = artResult.length;
+                } else if (iArtResult.length > artResult.length) {
+                    artMaxPage = iArtResult.length;
+                } else if (artResult.length === iArtResult.length) {
+                    artMaxPage = artResult.length;
+                }
+                //////------MAP--------/////
                 let mapPage = 1;
                 let mapMaxPage = 1;
 
@@ -164,7 +189,146 @@ module.exports = {
                 ////////////////////////////////
 
                 // Role checks for the user
-                if (args[1] === 'map') {
+                if (args[1] === 'art') {
+                    attendanceEmbed
+                        .setTitle(
+                            `Artping Team Attendance Check for ${args[0]}-2021`
+                        )
+                        .addFields({
+                            name: `✅ Active Users (${artActiveLength})`,
+                            value: `${
+                                artResult[artPage - 1] === undefined
+                                    ? 'None'
+                                    : artResult[artPage - 1].join(`\n`)
+                            } \n\n`,
+                        })
+                        .addFields({
+                            name: `❌Inactive Users (${artInactiveLength})`,
+                            value: `\n ${
+                                iArtResult[artPage - 1] === undefined
+                                    ? 'None'
+                                    : iArtResult[artPage - 1].join(`\n`)
+                            }\n`,
+                        })
+                        .setFooter(`Page ${artPage} of ${artMaxPage}`);
+                    let artEmbed = await message.channel.send(attendanceEmbed);
+                    if (artPage < artMaxPage) {
+                        artEmbed.react('⏭');
+                    }
+
+                    client.on('messageReactionAdd', async (reaction, user) => {
+                        if (reaction.message.partial)
+                            await reaction.message.fetch();
+                        if (reaction.partial) await reaction.fetch();
+                        if (user.bot) return;
+                        if (!reaction.message.guild) return;
+                        if (reaction.emoji.name === '⏭') {
+                            artPage++;
+                            reaction.message.reactions.cache
+                                .get('⏭')
+                                .users.remove(user.id);
+
+                            if (artPage > 1) {
+                                artEmbed.react('⏮');
+                            }
+                            if (artPage < artMaxPage) {
+                                artEmbed.react('⏭');
+                            }
+                            if (artPage == artMaxPage) {
+                                reaction.message.reactions.cache
+                                    .get('⏭')
+                                    .remove(user.id);
+                            }
+                            if (artPage > artMaxPage) {
+                                artPage = artMaxPage;
+                            }
+                            attendanceEmbed.fields = [];
+                            await artEmbed.edit(
+                                attendanceEmbed
+                                    .addFields({
+                                        name: `✅ Active Users (${artActiveLength})`,
+                                        value: `${
+                                            artResult[artPage - 1] === undefined
+                                                ? 'None'
+                                                : artResult[artPage - 1].join(
+                                                      `\n`
+                                                  )
+                                        } \n\n`,
+                                    })
+                                    .addFields({
+                                        name: `❌Inactive Users (${artInactiveLength})`,
+                                        value: `\n ${
+                                            iArtResult[artPage - 1] ===
+                                            undefined
+                                                ? 'None'
+                                                : iArtResult[artPage - 1].join(
+                                                      `\n`
+                                                  )
+                                        }\n`,
+                                    })
+                                    .setTitle(
+                                        `Artping Team Attendance Check for ${args[0]}-2021`
+                                    )
+                                    .setFooter(
+                                        `Page ${artPage} of ${artMaxPage}`
+                                    )
+                            );
+                        }
+
+                        if (reaction.emoji.name === '⏮') {
+                            artPage--;
+                            reaction.message.reactions.cache
+                                .get('⏮')
+                                .users.remove(user.id);
+
+                            if (artPage > 1) {
+                                artEmbed.react('⏮');
+                            }
+                            if (artPage < artMaxPage) {
+                                artEmbed.react('⏭');
+                            }
+                            if (artPage == 1) {
+                                reaction.message.reactions.cache
+                                    .get('⏮')
+                                    .remove(user.id);
+                            }
+                            if (artPage < 1) {
+                                artPage == 1;
+                            }
+                            attendanceEmbed.fields = [];
+                            await artEmbed.edit(
+                                attendanceEmbed
+                                    .addFields({
+                                        name: `✅ Active Users (${artActiveLength})`,
+                                        value: `${
+                                            artResult[artPage - 1] === undefined
+                                                ? 'None'
+                                                : artResult[artPage - 1].join(
+                                                      `\n`
+                                                  )
+                                        } \n\n`,
+                                    })
+                                    .addFields({
+                                        name: `❌Inactive Users (${artInactiveLength})`,
+                                        value: `\n ${
+                                            iArtResult[artPage - 1] ===
+                                            undefined
+                                                ? 'None'
+                                                : iArtResult[artPage - 1].join(
+                                                      `\n`
+                                                  )
+                                        }\n`,
+                                    })
+                                    .setTitle(
+                                        `Artping Team Attendance Check for ${args[0]}-2021`
+                                    )
+                                    .setFooter(
+                                        `Page ${artPage} of ${artMaxPage}`
+                                    )
+                            );
+                        }
+                    });
+                } else if (args[1] === 'map') {
                     attendanceEmbed
                         .setTitle(
                             `Mapping Team Attendance Check for ${args[0]}-2021`
