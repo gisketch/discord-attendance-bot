@@ -60,11 +60,11 @@ module.exports = {
                 ////// CHECK INACTIVE USERS /////////
 
                 //-----------ART TEAM-------------//
-                const artMembers = await message.guild.roles.cache
+                const artMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Art Team')
                     .members.map((m) => `<@${m.user.id}>`);
 
-                const artInactive = await uniqArt
+                const artInactive = uniqArt
                     .filter((x) => !artMembers.includes(x))
                     .concat(artMembers.filter((x) => !uniqArt.includes(x)));
 
@@ -75,11 +75,11 @@ module.exports = {
                     artInactive.length === 0 ? `None` : artInactive.join(`\n`);
 
                 //-----------DEV TEAM-------------//
-                const devMembers = await message.guild.roles.cache
+                const devMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Development Team')
                     .members.map((m) => `<@${m.user.id}>`);
 
-                const devInactive = await uniqDev
+                const devInactive = uniqDev
                     .filter((x) => !devMembers.includes(x))
                     .concat(devMembers.filter((x) => !uniqDev.includes(x)));
 
@@ -87,11 +87,11 @@ module.exports = {
                     devInactive.length === 0 ? `None` : devInactive.join(`\n`);
 
                 //-----------MAP TEAM-------------//
-                const mapMembers = await message.guild.roles.cache
+                const mapMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Mapping Team')
                     .members.map((m) => `<@${m.user.id}>`);
 
-                const mapInactive = await uniqMap
+                const mapInactive = uniqMap
                     .filter((x) => !mapMembers.includes(x))
                     .concat(mapMembers.filter((x) => !uniqMap.includes(x)));
 
@@ -99,11 +99,11 @@ module.exports = {
                     mapInactive.length === 0 ? `None` : mapInactive.join(`\n`);
 
                 //-----------TEST TEAM-------------//
-                const testMembers = await message.guild.roles.cache
+                const testMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Testing Team')
                     .members.map((m) => `<@${m.user.id}>`);
 
-                const testInactive = await uniqTest
+                const testInactive = uniqTest
                     .filter((x) => !testMembers.includes(x))
                     .concat(testMembers.filter((x) => !uniqTest.includes(x)));
 
@@ -113,11 +113,11 @@ module.exports = {
                         : testInactive.join(`\n`);
 
                 //-----------MOD TEAM-------------//
-                const modMembers = await message.guild.roles.cache
+                const modMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Management Team')
                     .members.map((m) => `<@${m.user.id}>`);
 
-                const modInactive = await uniqMod
+                const modInactive = uniqMod
                     .filter((x) => !modMembers.includes(x))
                     .concat(modMembers.filter((x) => !uniqMod.includes(x)));
 
