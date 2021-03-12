@@ -68,8 +68,6 @@ module.exports = {
                     (x1) => !uniqArt.some((x2) => x2 === x1)
                 );
 
-                console.log(artInactivity);
-
                 //-----------DEV TEAM-------------//
                 const devMembers = message.guild.roles.cache
                     .find((role) => role.name === 'Development Team')
