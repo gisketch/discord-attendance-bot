@@ -144,76 +144,31 @@ module.exports = {
                             name: 'Art Team',
                             value: `❌Inactive Users (${artInactive.length}): \n ${artInactiveValue}\n\n----------`,
                         });
-                        try {
-                            await user.send(attendanceEmbed);
-                        } catch (err) {
-                            await user.send(
-                                new Discord.MessageEmbed()
-                                    .setColor('#DD4444')
-                                    .setTitle('Error')
-                                    .setDescription(`${err}`)
-                            );
-                        }
+                        await message.channel.send(attendanceEmbed);
                     } else if (args[1] === 'dev') {
                         attendanceEmbed.addFields({
                             name: 'Development Team',
                             value: `❌Inactive Users (${devInactive.length}): \n ${devInactiveValue}\n\n----------`,
                         });
-                        try {
-                            await user.send(attendanceEmbed);
-                        } catch (err) {
-                            await user.send(
-                                new Discord.MessageEmbed()
-                                    .setColor('#DD4444')
-                                    .setTitle('Error')
-                                    .setDescription(`${err}`)
-                            );
-                        }
+                        await message.channel.send(attendanceEmbed);
                     } else if (args[1] === 'test') {
                         attendanceEmbed.addFields({
                             name: 'Testing Team',
                             value: `❌Inactive Users (${testInactive.length}): \n ${testInactiveValue}\n\n----------`,
                         });
-                        try {
-                            await user.send(attendanceEmbed);
-                        } catch (err) {
-                            await user.send(
-                                new Discord.MessageEmbed()
-                                    .setColor('#DD4444')
-                                    .setTitle('Error')
-                                    .setDescription(`${err}`)
-                            );
-                        }
+                        await message.channel.send(attendanceEmbed);
                     } else if (args[1] === 'map') {
                         attendanceEmbed.addFields({
                             name: 'Mapping Team',
                             value: `❌Inactive Users (${mapInactive.length}): \n ${mapInactiveValue}\n\n----------`,
                         });
-                        try {
-                            await user.send(attendanceEmbed);
-                        } catch (err) {
-                            await user.send(
-                                new Discord.MessageEmbed()
-                                    .setColor('#DD4444')
-                                    .setTitle('Error')
-                                    .setDescription(`${err}`)
-                            );
-                        }
+                        await message.channel.send(attendanceEmbed);
                     } else if (args[1] === 'mod') {
                         attendanceEmbed.addFields({
                             name: 'Management Team',
                             value: `❌Inactive Users (${modInactive.length}): \n ${modInactiveValue}\n\n----------`,
                         });
-                        try {
-                            await user.send(attendanceEmbed);
-                        } catch (err) {
-                            await user.send(
-                                new Discord.MessageEmbed()
-                                    .setColor('#DD4444')
-                                    .setTitle('Error')
-                                    .setDescription(`${err}`)
-                            );
-                        }
+                        await message.channel.send(attendanceEmbed);
                     } else {
                         let errorEmbed = new Discord.MessageEmbed()
                             .setTitle('Error')

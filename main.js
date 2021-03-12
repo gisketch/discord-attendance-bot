@@ -435,16 +435,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
                         value: `✅ Active Users (${attendance.modTeam.length}): \n ${modTeam} \n\n❌Inactive Users (${modInactive.length}): \n ${modInactiveValue}\n\n----------`,
                     });
                 }
-                try {
-                    await user.send(attendanceEmbed);
-                } catch (err) {
-                    await user.send(
-                        new Discord.MessageEmbed()
-                            .setColor('#DD4444')
-                            .setTitle('Error')
-                            .setDescription(`${err}`)
-                    );
-                }
+                await user.send(attendanceEmbed);
             } else {
                 await user.send(
                     new Discord.MessageEmbed()
