@@ -184,15 +184,27 @@ module.exports = {
                         await message.channel.send(errorEmbed);
                     }
                 } else {
-                    let files = fs.readdirSync(`./db/`);
-                    let errorEmbed = new Discord.MessageEmbed()
-                        .setTitle('No data found')
-                        .setColor('#771111')
-                        .setDescription(
-                            `No file with name ${fileName}. Here are the available data to check.`
-                        )
-                        .addFields({ name: 'Data', value: files.join('\n') });
-                    await message.channel.send(errorEmbed);
+                    try {
+                        let files = fs.readdirSync(`./db/`);
+                        let errorEmbed = new Discord.MessageEmbed()
+                            .setTitle('No data found')
+                            .setColor('#771111')
+                            .setDescription(
+                                `No file with name ${fileName}. Here are the available data to check.`
+                            )
+                            .addFields({
+                                name: 'Data',
+                                value: files.join('\n'),
+                            });
+                        await message.channel.send(errorEmbed);
+                    } catch (err) {
+                        let errorEmbed = new Discord.MessageEmbed()
+                            .setTitle('No data found')
+                            .setColor('#771111')
+                            .setDescription(`No data.`);
+                        await message.channel.send(errorEmbed);
+                        console.log(err);
+                    }
                 }
             } catch (err) {
                 console.error(err);
