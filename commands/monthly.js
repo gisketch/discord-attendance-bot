@@ -160,13 +160,7 @@ module.exports = {
                 if (args[1] === 'map') {
                     attendanceEmbed.addFields({
                         name: 'Mapping Team',
-                        value: `✅ Active Users (${
-                            uniqMap.length
-                        }): \n ${mapResult[0].join(
-                            `\n`
-                        )} \n\n❌Inactive Users (${mapInactive.length}): \n ${
-                            iMapResult[0]
-                        }\n\n----------`,
+                        value: `✅ Active Users (${uniqMap.length}): \n ${mapResult[0]} \n\n❌Inactive Users (${mapInactive.length}): \n ${iMapResult[0]}\n\n----------`,
                     });
                     await message.channel.send(attendanceEmbed);
                 } else {
