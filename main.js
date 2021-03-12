@@ -435,7 +435,9 @@ client.on('messageReactionAdd', async (reaction, user) => {
                         value: `✅ Active Users (${attendance.modTeam.length}): \n ${modTeam} \n\n❌Inactive Users (${modInactive.length}): \n ${modInactiveValue}\n\n----------`,
                     });
                 }
-                await user.send(attendanceEmbed);
+                await user.send(
+                    'This command is work in progress due to errors. Please try using monthly command instead.'
+                );
             } else {
                 await user.send(
                     new Discord.MessageEmbed()
