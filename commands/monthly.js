@@ -5,6 +5,7 @@ module.exports = {
     description: 'Check monthly inactive users',
     async execute(client, message, args, Discord) {
         if (args[0] && args[1]) {
+            let page = 0;
             let month = args[0];
             let attendance = {
                 artTeam: [],
@@ -56,17 +57,6 @@ module.exports = {
                 uniqTest = [...new Set(attendance.testTeam)];
                 uniqMap = [...new Set(attendance.mapTeam)];
                 uniqMod = [...new Set(attendance.modTeam)];
-                //Join each users for fields
-                const artTeam =
-                    uniqArt.length === 0 ? `None` : uniqArt.join('\n');
-                const devTeam =
-                    uniqDev.length === 0 ? `None` : uniqDev.join('\n');
-                const testTeam =
-                    uniqTest.length === 0 ? `None` : uniqTest.join('\n');
-                const mapTeam =
-                    uniqMap.length === 0 ? `None` : uniqMap.join('\n');
-                const modTeam =
-                    uniqMod.length === 0 ? `None` : uniqMod.join('\n');
 
                 ////// CHECK INACTIVE USERS /////////
 
@@ -160,7 +150,15 @@ module.exports = {
                 if (args[1] === 'map') {
                     attendanceEmbed.addFields({
                         name: 'Mapping Team',
-                        value: `✅ Active Users (${uniqMap.length}): \n ${mapResult[0]} \n\n❌Inactive Users (${mapInactive.length}): \n ${iMapResult[0]}\n\n----------`,
+                        value: `✅ Active Users (${uniqMap.length}): \n ${
+                            mapResult[0].length === 0
+                                ? 'None'
+                                : mapResult[0].join(`\n`)
+                        } \n\n❌Inactive Users (${mapInactive.length}): \n ${
+                            iMapResult[0].length === 0
+                                ? 'None'
+                                : iMapResult[0].join(`\n`)
+                        }\n\n----------`,
                     });
                     await message.channel.send(attendanceEmbed);
                 } else {
