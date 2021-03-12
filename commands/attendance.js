@@ -82,8 +82,8 @@ module.exports = {
             await message.channel.send(
                 new Discord.MessageEmbed()
                     .setColor('#AA2222')
-                    .setTitle('Channel not found!')
-                    .setDescription(`Are you sure you're in the right server?`)
+                    .setTitle('SYSTEM ERROR!')
+                    .setDescription(`${err}`)
                     .setFooter(
                         'Monke Monke Monke Monke Monke Monke Monke Monke Monke Monke Monke Monke Monke '
                     )
