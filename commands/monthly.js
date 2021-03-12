@@ -153,11 +153,11 @@ module.exports = {
                     attendanceEmbed.addFields({
                         name: 'Mapping Team',
                         value: `✅ Active Users (${uniqMap.length}): \n ${
-                            mapResult[0].length === 0
+                            mapResult[0] !== undefined
                                 ? 'None'
                                 : mapResult[0].join(`\n`)
                         } \n\n❌Inactive Users (${mapInactive.length}): \n ${
-                            iMapResult[0].length === 0
+                            iMapResult[0] !== undefined
                                 ? 'None'
                                 : iMapResult[0].join(`\n`)
                         }\n\n----------`,
