@@ -149,8 +149,17 @@ module.exports = {
                     .fill()
                     .map((_) => mapInactive.splice(0, n));
 
-                console.log(mapResult.length);
-                console.log(iMapResult.length);
+                if (mapResult.length === 0) {
+                    mapMaxPage = iMapResult.length;
+                } else if (iMapResult.length === 0) {
+                    mapMaxPage = mapResult.length;
+                } else if (mapResult.length > iMapResult.length) {
+                    mapMaxPage = mapResult.length;
+                } else if (iMapResult.length > mapResult.length) {
+                    mapMaxPage = iMapResult.length;
+                } else if (mapResult.length === iMapResult.length) {
+                    mapMaxPage = mapResult.length;
+                }
 
                 ////////////////////////////////
 
@@ -178,6 +187,9 @@ module.exports = {
                         })
                         .setFooter(`Page ${args[2]} of ${mapMaxPage}`);
                     let mapEmbed = await message.channel.send(attendanceEmbed);
+                    if (mapPage < mapMaxPage) {
+                        mapEmbed.react('⏭');
+                    }
 
                     client.on('messageReactionAdd', async (reaction, user) => {
                         if (reaction.message.partial)
@@ -186,7 +198,7 @@ module.exports = {
                         if (user.bot) return;
                         if (!reaction.message.guild) return;
                         if (reaction.emoji.name === '⏭') {
-                            console.log(emoji);
+                            console.log('Yay');
                         }
                     });
                 } else {
