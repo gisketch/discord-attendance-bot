@@ -2,6 +2,7 @@ const fs = require('fs');
 
 module.exports = {
     name: 'check',
+    aliases: ['c'],
     description: 'Check monthly inactive users',
     async execute(client, message, args, Discord) {
         if (args[0] && args[1]) {

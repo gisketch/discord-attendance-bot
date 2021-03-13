@@ -17,19 +17,9 @@ module.exports = {
                     value: 'Sends the list of all the data in the database.',
                 },
                 {
-                    name: 'a!inactive',
+                    name: 'a!check',
                     value:
-                        "Check users' inactivity during a set quarter of a month. \n`usage: a!inactive month-quarter team`\n`ex. a!inactive 3-2 art`",
-                },
-                {
-                    name: 'a!active',
-                    value:
-                        "Check users' activity during a set quarter of a month. \n`usage: a!active month-quarter team`\n`ex. a!active 3-2 art`",
-                },
-                {
-                    name: 'a!monthly',
-                    value:
-                        "Check users' activity in the set month. \n`usage: a!monthly month team`\n`ex. a!monthly 3 dev`",
+                        "Check users' activity in the set month or quarter. \n`usage: a!check month/month-quarter team`\n`ex. a!check 9-4 dev`",
                 },
                 {
                     name: 'a!ping',
