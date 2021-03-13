@@ -16,7 +16,6 @@ client.events = new Discord.Collection();
 
 const channel = process.env.CHANNEL;
 const checkEmoji = '✅';
-const activeCheck = '📔';
 
 Number.prototype.between = function (a, b) {
     var min = Math.min.apply(Math, [a, b]),
@@ -50,7 +49,7 @@ const attendanceEvent = async () => {
             }/${today.getFullYear()}!`
         )
         .setDescription(
-            "It's that time of the month again. React here for attendance!\n\nReact with ✅ to be register your attendance.\nReact with 📔 if you're a Lead or Team Manager to get a summary of your members' activity.\n"
+            "It's that time of the month again. React here for attendance!\n\nReact with ✅ to be record your attendance.\n"
         )
         .addFields(
             {
@@ -70,7 +69,6 @@ const attendanceEvent = async () => {
             }
         )
         .setFooter('Source code: github.com/gisketch/discord-attendance-bot')
-        .setTimestamp()
         .setImage('https://i.imgur.com/cbhevsG.png');
 
     if (quarter === 1) {
@@ -85,7 +83,6 @@ const attendanceEvent = async () => {
 
     let messageEmbed = await attendanceChannel.send(embed);
     messageEmbed.react(checkEmoji);
-    messageEmbed.react(activeCheck);
 };
 
 client.on('messageReactionAdd', async (reaction, user) => {
@@ -216,238 +213,6 @@ client.on('messageReactionAdd', async (reaction, user) => {
             //Write attendance data to json
             let attendanceData = JSON.stringify(attendance);
             fs.writeFileSync(`./db/${fileName}.json`, attendanceData);
-        } else if (reaction.emoji.name === activeCheck) {
-            //////////////////////////////////////////////
-            /////////// 📔 - EMOJI CHECK - 📔 ////////////
-            //////////////////////////////////////////////
-
-            let today = new Date();
-            let quarter;
-
-            if (today.getDate().between(1, 8)) {
-                quarter = 1;
-            } else if (today.getDate().between(8, 15)) {
-                quarter = 2;
-            } else if (today.getDate().between(15, 22)) {
-                quarter = 3;
-            } else if (today.getDate().between(22, 32)) {
-                quarter = 4;
-            }
-            //Read json
-            let attendance = {};
-            const fileName = `${
-                today.getMonth() + 1
-            }-${quarter}-${today.getFullYear()}-ActivityData`;
-            try {
-                if (fs.existsSync(`./db/${fileName}.json`)) {
-                    attendance = JSON.parse(
-                        fs.readFileSync(`./db/${fileName}.json`)
-                    );
-                } else {
-                    attendance = {
-                        artTeam: [],
-                        devTeam: [],
-                        mapTeam: [],
-                        testTeam: [],
-                        modTeam: [],
-                    };
-                }
-            } catch (err) {
-                console.error(err);
-            }
-
-            //Join each users for fields
-            const artTeam =
-                attendance.artTeam.length === 0
-                    ? `None`
-                    : attendance.artTeam.join('\n');
-            const devTeam =
-                attendance.devTeam.length === 0
-                    ? `None`
-                    : attendance.devTeam.join('\n');
-            const testTeam =
-                attendance.testTeam.length === 0
-                    ? `None`
-                    : attendance.testTeam.join('\n');
-            const mapTeam =
-                attendance.mapTeam.length === 0
-                    ? `None`
-                    : attendance.mapTeam.join('\n');
-            const modTeam =
-                attendance.modTeam.length === 0
-                    ? `None`
-                    : attendance.modTeam.join('\n');
-
-            ////// CHECK INACTIVE USERS /////////
-
-            //-----------ART TEAM-------------//
-            const artMembers = reaction.message.guild.roles.cache
-                .find((role) => role.name === 'Art Team')
-                .members.map((m) => `<@${m.user.id}>`);
-
-            const artInactive = attendance.artTeam
-                .filter((x) => !artMembers.includes(x))
-                .concat(
-                    artMembers.filter((x) => !attendance.artTeam.includes(x))
-                );
-
-            const artInactiveValue =
-                artInactive.length === 0 ? `None` : artInactive.join(`\n`);
-
-            //-----------DEV TEAM-------------//
-            const devMembers = reaction.message.guild.roles.cache
-                .find((role) => role.name === 'Development Team')
-                .members.map((m) => `<@${m.user.id}>`);
-
-            const devInactive = attendance.devTeam
-                .filter((x) => !devMembers.includes(x))
-                .concat(
-                    devMembers.filter((x) => !attendance.devTeam.includes(x))
-                );
-
-            const devInactiveValue =
-                devInactive.length === 0 ? `None` : devInactive.join(`\n`);
-
-            //-----------MAP TEAM-------------//
-            const mapMembers = reaction.message.guild.roles.cache
-                .find((role) => role.name === 'Mapping Team')
-                .members.map((m) => `<@${m.user.id}>`);
-
-            const mapInactive = attendance.mapTeam
-                .filter((x) => !mapMembers.includes(x))
-                .concat(
-                    mapMembers.filter((x) => !attendance.mapTeam.includes(x))
-                );
-
-            const mapInactiveValue =
-                mapInactive.length === 0 ? `None` : mapInactive.join(`\n`);
-
-            //-----------TEST TEAM-------------//
-            const testMembers = reaction.message.guild.roles.cache
-                .find((role) => role.name === 'Testing Team')
-                .members.map((m) => `<@${m.user.id}>`);
-
-            const testInactive = attendance.testTeam
-                .filter((x) => !testMembers.includes(x))
-                .concat(
-                    testMembers.filter((x) => !attendance.testTeam.includes(x))
-                );
-
-            const testInactiveValue =
-                testInactive.length === 0 ? `None` : testInactive.join(`\n`);
-
-            //-----------MOD TEAM-------------//
-            const modMembers = reaction.message.guild.roles.cache
-                .find((role) => role.name === 'Management Team')
-                .members.map((m) => `<@${m.user.id}>`);
-
-            const modInactive = attendance.modTeam
-                .filter((x) => !modMembers.includes(x))
-                .concat(
-                    modMembers.filter((x) => !attendance.modTeam.includes(x))
-                );
-
-            const modInactiveValue =
-                modInactive.length === 0 ? `None` : modInactive.join(`\n`);
-
-            // ---- MAKING EMBEDS ------ //
-            let attendanceEmbed = new Discord.MessageEmbed()
-                .setColor(`#aaEEaa`)
-                .setTitle(
-                    `Attendance Check for ${
-                        today.getMonth() + 1
-                    }-${quarter}-${today.getFullYear()}!`
-                )
-                .setDescription(
-                    `Here's this quarter of the month's users' activity 🎉`
-                );
-
-            reaction.message.reactions.cache.get(activeCheck).remove(user);
-            reaction.message.react(activeCheck);
-
-            const guildMember = reaction.message.guild.members.cache.find(
-                (member) => member.id === user.id
-            );
-
-            // Role checks for the user
-            if (
-                guildMember.roles.cache.some(
-                    (r) =>
-                        r.name.startsWith('Lead') ||
-                        r.name.endsWith('Manager') ||
-                        r.name.startsWith('Head')
-                )
-            ) {
-                if (
-                    guildMember.roles.cache.some(
-                        (r) =>
-                            r.name === 'Art Team Manager' ||
-                            r.name === 'Lead Animator' ||
-                            r.name === 'Lead Composer' ||
-                            r.name === 'Lead 3D Artist' ||
-                            r.name === 'Lead 2D Artists'
-                    )
-                ) {
-                    attendanceEmbed.addFields({
-                        name: 'Art Team',
-                        value: `✅ Active Users (${attendance.artTeam.length}): \n ${artTeam} \n\n❌Inactive Users (${artInactive.length}): \n ${artInactiveValue}\n\n----------`,
-                    });
-                }
-                if (
-                    guildMember.roles.cache.some(
-                        (r) => r.name === 'Lead Developer'
-                    )
-                ) {
-                    attendanceEmbed.addFields({
-                        name: 'Development Team',
-                        value: `✅ Active Users (${attendance.devTeam.length}): \n ${devTeam} \n\n❌Inactive Users (${devInactive.length}): \n ${devInactiveValue}\n\n----------`,
-                    });
-                }
-                if (
-                    guildMember.roles.cache.some(
-                        (r) =>
-                            r.name === 'Lead Tester' ||
-                            r.name === 'Testing Team Manager'
-                    )
-                ) {
-                    attendanceEmbed.addFields({
-                        name: 'Testing Team',
-                        value: `✅ Active Users (${attendance.testTeam.length}): \n ${testTeam} \n\n❌Inactive Users (${testInactive.length}): \n ${testInactiveValue}\n\n----------`,
-                    });
-                }
-                if (
-                    guildMember.roles.cache.some(
-                        (r) => r.name === 'Mapping Manager'
-                    )
-                ) {
-                    attendanceEmbed.addFields({
-                        name: 'Mapping Team',
-                        value: `✅ Active Users (${attendance.mapTeam.length}): \n ${mapTeam} \n\n❌Inactive Users (${mapInactive.length}): \n ${mapInactiveValue}\n\n----------`,
-                    });
-                }
-                if (
-                    guildMember.roles.cache.some(
-                        (r) => r.name === 'Head Moderator'
-                    )
-                ) {
-                    attendanceEmbed.addFields({
-                        name: 'Management Team',
-                        value: `✅ Active Users (${attendance.modTeam.length}): \n ${modTeam} \n\n❌Inactive Users (${modInactive.length}): \n ${modInactiveValue}\n\n----------`,
-                    });
-                }
-                await user.send(
-                    'This command is work in progress due to errors. Please try using monthly command instead.'
-                );
-            } else {
-                await user.send(
-                    new Discord.MessageEmbed()
-                        .setColor('#AA0000')
-                        .setTitle('No Permission')
-                        .setDescription(
-                            "You have no permission to use this command. Contact <@221378714099908609> or <@712437132240617572> if you think something's wrong."
-                        )
-                );
-            }
         }
     } else {
         return;
