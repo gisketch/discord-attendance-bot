@@ -26,6 +26,7 @@ Number.prototype.between = function (a, b) {
 const attendanceEvent = async () => {
     const attendanceChannel = client.channels.cache.get(channel);
     //CLEAR MSGS
+    attendanceChannel.bulkDelete(1);
     /////////
     let today = new Date();
     let quarter;
