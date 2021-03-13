@@ -106,6 +106,17 @@ module.exports = {
                 }
             }
 
+            if (!monthly && !quarterly) {
+                await message.channel.send(
+                    new Discord.MessageEmbed()
+                        .setTitle('Wrong argument')
+                        .setDescription(
+                            'Correct usage examples:\n`a!check 3 art` or `a!check 12-2 art`'
+                        )
+                        .setColor('#dd3333')
+                );
+            }
+
             if ((monthly && monthCheck) || (quarterly && quarterCheck)) {
                 ////// CHECK INACTIVE USERS /////////
                 uniqArt = [...new Set(attendance.artTeam)];
