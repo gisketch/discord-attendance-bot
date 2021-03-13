@@ -20,7 +20,10 @@ module.exports = {
             let uniqMod;
             let monthCheck = false;
             let quarterCheck = false;
-            const monthly = parseInt(args[0]) >= 1 && parseInt(args[0]) <= 12;
+            const monthly =
+                parseInt(args[0]) >= 1 &&
+                parseInt(args[0]) <= 12 &&
+                !args[0].includes('-');
             const quarterly = args[0].split('-').length === 2;
             if (quarterly) {
                 let fileName = `${
@@ -1071,7 +1074,7 @@ module.exports = {
             let errorEmbed = new Discord.MessageEmbed()
                 .setTitle('Error')
                 .setDescription(
-                    'Wrong use of command. Use `a!monthly` `month(int)` `team`'
+                    'Wrong use of command. Use `a!check` `month or month-quarter` `team`'
                 )
                 .setFooter('AoTTG 2 - Attendance Checker')
                 .setColor('#DD2222');
