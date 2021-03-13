@@ -11,8 +11,7 @@ module.exports = {
             const checkEmoji = '✅';
             const activeCheck = '📔';
             //CLEAR MSGS
-            message.delete();
-            attendanceChannel.bulkDelete(99);
+            attendanceChannel.bulkDelete(1);
             /////////
             let today = new Date();
             let quarter;
