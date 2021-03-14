@@ -328,7 +328,13 @@ module.exports = {
                             ].map((r) => r.replace(/\D/g, ''));
                         }
                         if (args[2] === '2d') {
-                            console.log(artResult[artPage - 1]);
+                            artResult[artPage - 1] = artResult[
+                                artPage - 1
+                            ].filter((r) =>
+                                message.guild.roles.cache
+                                    .find((role) => role.name === '2D Artist')
+                                    .members.map((m) => `<@${m.user.id}>`)
+                            );
                         }
                     }
 
