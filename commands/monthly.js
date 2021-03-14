@@ -130,7 +130,7 @@ module.exports = {
                     .find((role) => role.name === 'Art Team')
                     .members.map((m) => `<@${m.user.id}>`);
 
-                const artInactive = artMembers.filter(
+                let artInactive = artMembers.filter(
                     (x1) => !uniqArt.some((x2) => x2 === x1)
                 );
 
@@ -139,7 +139,7 @@ module.exports = {
                     .find((role) => role.name === 'Development Team')
                     .members.map((m) => `<@${m.user.id}>`);
 
-                const devInactive = devMembers.filter(
+                let devInactive = devMembers.filter(
                     (x1) => !uniqDev.some((x2) => x2 === x1)
                 );
 
@@ -148,7 +148,7 @@ module.exports = {
                     .find((role) => role.name === 'Mapping Team')
                     .members.map((m) => `<@${m.user.id}>`);
 
-                const mapInactive = mapMembers.filter(
+                let mapInactive = mapMembers.filter(
                     (x1) => !uniqMap.some((x2) => x2 === x1)
                 );
 
@@ -157,7 +157,7 @@ module.exports = {
                     .find((role) => role.name === 'Testing Team')
                     .members.map((m) => `<@${m.user.id}>`);
 
-                const testInactive = testMembers.filter(
+                let testInactive = testMembers.filter(
                     (x1) => !uniqTest.some((x2) => x2 === x1)
                 );
 
@@ -166,7 +166,7 @@ module.exports = {
                     .find((role) => role.name === 'Management Team')
                     .members.map((m) => `<@${m.user.id}>`);
 
-                const modInactive = modMembers.filter(
+                let modInactive = modMembers.filter(
                     (x1) => !uniqMod.some((x2) => x2 === x1)
                 );
 
