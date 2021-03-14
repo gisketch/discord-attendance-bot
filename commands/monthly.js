@@ -330,6 +330,8 @@ module.exports = {
                             artResult[artPage - 1] = artResult[
                                 artPage - 1
                             ].map((r) => r.replace(/\D/g, ''));
+                        } else {
+                            artResult[artPage - 1] = ['None'];
                         }
                         if (args[2] === '2d') {
                             filter = '2D Artist';
@@ -347,9 +349,6 @@ module.exports = {
                         // .find((role) => role.name === filter)
                         // .members.map((m) => `<@${m.user.id}>`);
                     }
-
-                    if (artResult[artPage - 1] === [])
-                        artResult[artPage - 1] = ['None'];
 
                     attendanceEmbed
                         .setTitle(
