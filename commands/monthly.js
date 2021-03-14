@@ -323,7 +323,10 @@ module.exports = {
                 if (args[1] === 'art') {
                     if (args[2]) {
                         let filter = '';
-                        if (artResult[artPage - 1] !== undefined) {
+                        if (
+                            artResult[artPage - 1] !== undefined ||
+                            artResult[artPage - 1] !== []
+                        ) {
                             artResult[artPage - 1] = artResult[
                                 artPage - 1
                             ].map((r) => r.replace(/\D/g, ''));
