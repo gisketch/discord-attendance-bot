@@ -348,12 +348,12 @@ module.exports = {
                         )
                         .addFields({
                             name: `✅ Active Users (${artActiveLength})`,
-                            value: `✔✔✔✔✔\n${
+                            value: `--------\n${
                                 artResult[artPage - 1] === undefined ||
                                 artResult[artPage - 1] === []
                                     ? 'None'
                                     : artResult[artPage - 1].join(`\n`)
-                            } \n\n`,
+                            } \n--------\n`,
                         })
                         .addFields({
                             name: `❌Inactive Users (${artInactiveLength})`,
