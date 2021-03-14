@@ -322,20 +322,15 @@ module.exports = {
                 // Role checks for the user
                 if (args[1] === 'art') {
                     if (args[2]) {
-                        if (artResult[artPage - 1] !== undefined) {
-                            artResult[artPage - 1] = artResult[
-                                artPage - 1
-                            ].map((r) => r.replace(/\D/g, ''));
-                        }
+                        let filter = '';
+
                         if (args[2] === '2d') {
-                            artResult[artPage - 1] = artResult[
-                                artPage - 1
-                            ].filter((r) =>
-                                message.guild.roles.cache
-                                    .find((role) => role.name === '2D Artist')
-                                    .members.map((m) => `<@${m.user.id}>`)
-                            );
+                            filter = '2D Artist';
                         }
+
+                        artResult[artPage - 1] = message.guild.roles.cache
+                            .find((role) => role.name === filter)
+                            .members.map((m) => `<@${m.user.id}>`);
                     }
 
                     attendanceEmbed
