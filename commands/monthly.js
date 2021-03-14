@@ -182,32 +182,7 @@ module.exports = {
 
                 ///// ------- DIVIDING USERS ------ ////
                 const n = 15; //tweak this to add more items per line
-                /////-------ART----------/////
-                let artPage = 1;
-                let artMaxPage = 1;
 
-                const artActiveLength = uniqArt.length;
-                const artInactiveLength = artInactive.length;
-
-                const artResult = new Array(Math.ceil(uniqArt.length / n))
-                    .fill()
-                    .map((_) => uniqArt.splice(0, n));
-
-                const iArtResult = new Array(Math.ceil(artInactive.length / n))
-                    .fill()
-                    .map((_) => artInactive.splice(0, n));
-
-                if (artResult.length === 0) {
-                    artMaxPage = iArtResult.length;
-                } else if (iArtResult.length === 0) {
-                    artMaxPage = artResult.length;
-                } else if (artResult.length > iArtResult.length) {
-                    artMaxPage = artResult.length;
-                } else if (iArtResult.length > artResult.length) {
-                    artMaxPage = iArtResult.length;
-                } else if (artResult.length === iArtResult.length) {
-                    artMaxPage = artResult.length;
-                }
                 /////-------DEV----------/////
                 let devPage = 1;
                 let devMaxPage = 1;
@@ -318,38 +293,33 @@ module.exports = {
                 }
 
                 ////////////////////////////////
+                /////-------ART----------/////
+                let artPage = 1;
+                let artMaxPage = 1;
 
                 // Role checks for the user
                 if (args[1] === 'art') {
                     if (args[2]) {
                         let filter = '';
-                        if (
-                            artResult[artPage - 1] !== undefined ||
-                            artResult[artPage - 1] !== []
-                        ) {
-                            artResult[artPage - 1] = artResult[
-                                artPage - 1
-                            ].map((r) => r.replace(/\D/g, ''));
+                        if (uniqArt !== undefined || uniqArt !== []) {
+                            uniqArt = uniqArt.map((r) => r.replace(/\D/g, ''));
                         } else {
-                            artResult[artPage - 1] = [];
+                            uniqArt = [];
                         }
 
-                        if (
-                            iArtResult[artPage - 1] !== undefined ||
-                            iArtResult[artPage - 1] !== []
-                        ) {
-                            iArtResult[artPage - 1] = iArtResult[
-                                artPage - 1
-                            ].map((r) => r.replace(/\D/g, ''));
+                        if (artInactive !== undefined || artInactive !== []) {
+                            artInactive = artInactive.map((r) =>
+                                r.replace(/\D/g, '')
+                            );
                         } else {
-                            iArtResult[artPage - 1] = [];
+                            artInactive = [];
                         }
 
                         if (args[2] === '2d') {
                             filter = '2D Artist';
                         }
 
-                        artResult[artPage - 1] = artResult[artPage - 1]
+                        uniqArt = uniqArt
                             .filter((e) =>
                                 message.guild.roles.cache
                                     .find((r) => r.name === filter)
@@ -358,7 +328,7 @@ module.exports = {
                             )
                             .map((e) => `<@${e}>`);
 
-                        iArtResult[artPage - 1] = iArtResult[artPage - 1]
+                        artInactive = artInactive
                             .filter((e) =>
                                 message.guild.roles.cache
                                     .find((r) => r.name === filter)
@@ -371,6 +341,30 @@ module.exports = {
                         // .members.map((m) => `<@${m.user.id}>`);
                     }
 
+                    const artActiveLength = uniqArt.length;
+                    const artInactiveLength = artInactive.length;
+
+                    const artResult = new Array(Math.ceil(uniqArt.length / n))
+                        .fill()
+                        .map((_) => uniqArt.splice(0, n));
+
+                    const iArtResult = new Array(
+                        Math.ceil(artInactive.length / n)
+                    )
+                        .fill()
+                        .map((_) => artInactive.splice(0, n));
+
+                    if (artResult.length === 0) {
+                        artMaxPage = iArtResult.length;
+                    } else if (iArtResult.length === 0) {
+                        artMaxPage = artResult.length;
+                    } else if (artResult.length > iArtResult.length) {
+                        artMaxPage = artResult.length;
+                    } else if (iArtResult.length > artResult.length) {
+                        artMaxPage = iArtResult.length;
+                    } else if (artResult.length === iArtResult.length) {
+                        artMaxPage = artResult.length;
+                    }
                     console.log(artResult[artPage - 1]); //Returns []
                     console.log(artResult[artPage - 1] === []); //Returns false
                     console.log(artResult[artPage - 1] === undefined); //Returns false
