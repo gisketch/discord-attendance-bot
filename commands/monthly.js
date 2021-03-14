@@ -326,7 +326,7 @@ module.exports = {
                             console.log(r)
                         );
                         if (args[2] === '2d') {
-                            console.log(artFiltered);
+                            console.log('logged');
                         }
                     }
 
