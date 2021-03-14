@@ -19,7 +19,7 @@ module.exports = {
                 {
                     name: 'a!check',
                     value:
-                        "Check users' activity in the set month or quarter. \n`usage: a!check month/month-quarter team`\n`ex. a!check 9-4 dev`",
+                        "Check users' activity in the set month or quarter. \n`usage: a!check month/month-quarter team [subteam(optional)]`\n`ex. a!check 9-4 dev`\n`a!check 3-2 art 2d`",
                 },
                 {
                     name: 'a!ping',
