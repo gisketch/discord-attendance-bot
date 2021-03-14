@@ -348,6 +348,7 @@ module.exports = {
                         // .members.map((m) => `<@${m.user.id}>`);
                     }
 
+                    console.log(artResult[artPage - 1]);
                     attendanceEmbed
                         .setTitle(
                             `Art Team Attendance Check for ${args[0]}-2021`
