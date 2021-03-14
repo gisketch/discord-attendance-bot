@@ -341,6 +341,10 @@ module.exports = {
                             )
                             .map((e) => `<@${e}>`);
 
+                        artResult[artPage - 1] =
+                            artResult[artPage - 1] === []
+                                ? ['None']
+                                : artResult[artPage - 1];
                         // message.guild.roles.cache
                         // .find((role) => role.name === filter)
                         // .members.map((m) => `<@${m.user.id}>`);
