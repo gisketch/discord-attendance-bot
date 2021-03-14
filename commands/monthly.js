@@ -321,6 +321,15 @@ module.exports = {
 
                 // Role checks for the user
                 if (args[1] === 'art') {
+                    if (args[2]) {
+                        const artFiltered = artResult.filter((r) =>
+                            r.replace(/\D/g, '')
+                        );
+                        if (args[2] === '2d') {
+                            console.log(artFiltered);
+                        }
+                    }
+
                     attendanceEmbed
                         .setTitle(
                             `Art Team Attendance Check for ${args[0]}-2021`
