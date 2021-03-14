@@ -340,11 +340,6 @@ module.exports = {
                                     .includes(e)
                             )
                             .map((e) => `<@${e}>`);
-
-                        artResult[artPage - 1] =
-                            artResult[artPage - 1] === []
-                                ? ['None']
-                                : artResult[artPage - 1];
                         // message.guild.roles.cache
                         // .find((role) => role.name === filter)
                         // .members.map((m) => `<@${m.user.id}>`);
@@ -357,7 +352,8 @@ module.exports = {
                         .addFields({
                             name: `✅ Active Users (${artActiveLength})`,
                             value: `${
-                                artResult[artPage - 1] === undefined
+                                artResult[artPage - 1] === undefined ||
+                                artResult[artPage - 1] === []
                                     ? 'None'
                                     : artResult[artPage - 1].join(`\n`)
                             } \n\n`,
