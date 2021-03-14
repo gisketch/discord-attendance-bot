@@ -333,7 +333,7 @@ module.exports = {
                         }
 
                         artResult[artPage - 1] = artResult[
-                            artpage - 1
+                            artPage - 1
                         ].filter((e) =>
                             e.includes(
                                 message.guild.roles.cache
