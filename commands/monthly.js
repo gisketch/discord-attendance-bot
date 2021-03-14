@@ -317,6 +317,34 @@ module.exports = {
 
                         if (args[2] === '2d') {
                             filter = '2D Artist';
+                        } else if (args[2] === '3d') {
+                            filter = '3D Artist';
+                        } else if (
+                            args[2] === 'anim' ||
+                            args[2] === 'animator'
+                        ) {
+                            filter = 'Animator';
+                        } else if (
+                            args[2] === 'comp' ||
+                            args[2] === 'composer'
+                        ) {
+                            filter = 'Composer';
+                        } else if (args[2] === 'sfx') {
+                            filter = 'SFX Designer';
+                        } else {
+                            filter = '';
+                            await message.channel.send(
+                                new Discord.MessageEmbed()
+                                    .setTitle('Wrong Subteam')
+                                    .setDescription(
+                                        'These are all the subteams that are available for the Art Team.'
+                                    )
+                                    .addFields({
+                                        name: 'Subteams',
+                                        value: `2d\n3d\nanim\ncomp\nsfx`,
+                                    })
+                                    .setColor('#AA2222')
+                            );
                         }
 
                         uniqArt = uniqArt
@@ -378,11 +406,11 @@ module.exports = {
                         )
                         .addFields({
                             name: `✅ Active Users (${artActiveLength})`,
-                            value: `----\n${
+                            value: `${
                                 artResult[artPage - 1] === undefined
                                     ? 'None'
                                     : artResult[artPage - 1].join(`\n`)
-                            } \n----\n`,
+                            } \n\n`,
                         })
                         .addFields({
                             name: `❌Inactive Users (${artInactiveLength})`,
@@ -393,11 +421,15 @@ module.exports = {
                             }\n`,
                         })
                         .setFooter(`Page ${artPage} of ${artMaxPage}`);
-                    let artEmbed = await message.channel.send(attendanceEmbed);
-                    if (artPage < artMaxPage) {
-                        artEmbed.react('⏭');
+                    if ((filter !== '' && args[2]) || !args[2]) {
+                        let artEmbed = await message.channel.send(
+                            attendanceEmbed
+                        );
+                        if (artPage < artMaxPage) {
+                            artEmbed.react('⏭');
+                        }
+                        artEmbed.react('✅');
                     }
-                    artEmbed.react('✅');
 
                     client.on('messageReactionAdd', async (reaction, user) => {
                         if (user.bot) return;
