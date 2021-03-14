@@ -297,10 +297,10 @@ module.exports = {
                 let artPage = 1;
                 let artMaxPage = 1;
 
+                let filter = '';
                 // Role checks for the user
                 if (args[1] === 'art') {
                     if (args[2]) {
-                        let filter = '';
                         if (uniqArt !== undefined || uniqArt !== []) {
                             uniqArt = uniqArt.map((r) => r.replace(/\D/g, ''));
                         } else {
