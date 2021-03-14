@@ -322,14 +322,13 @@ module.exports = {
                 // Role checks for the user
                 if (args[1] === 'art') {
                     if (args[2]) {
-                        let artFiltered = [];
-                        if (mapResult[artPage - 1] !== undefined) {
-                            artFiltered = mapResult[artPage - 1].map((r) =>
-                                r.replace(/\D/g, '')
-                            );
+                        if (artResult[artPage - 1] !== undefined) {
+                            artResult[artPage - 1] = artResult[
+                                artPage - 1
+                            ].map((r) => r.replace(/\D/g, ''));
                         }
                         if (args[2] === '2d') {
-                            console.log(artFiltered);
+                            console.log(artResult[artPage - 1]);
                         }
                     }
 
