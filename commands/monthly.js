@@ -393,12 +393,6 @@ module.exports = {
                     } else if (artResult.length === iArtResult.length) {
                         artMaxPage = artResult.length;
                     }
-                    console.log(artResult[artPage - 1]); //Returns []
-                    console.log(artResult[artPage - 1] === []); //Returns false
-                    console.log(artResult[artPage - 1] === undefined); //Returns false
-                    console.log(artResult[artPage - 1] === null); //Returns false
-                    console.log(artResult[artPage - 1] === ['']); //Returns false
-                    console.log(artResult[artPage - 1] === 0); //Returns false
 
                     attendanceEmbed
                         .setTitle(
