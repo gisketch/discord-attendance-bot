@@ -421,10 +421,9 @@ module.exports = {
                             }\n`,
                         })
                         .setFooter(`Page ${artPage} of ${artMaxPage}`);
+                    let artEmbed;
                     if ((filter !== '' && args[2]) || !args[2]) {
-                        let artEmbed = await message.channel.send(
-                            attendanceEmbed
-                        );
+                        artEmbed = await message.channel.send(attendanceEmbed);
                         if (artPage < artMaxPage) {
                             artEmbed.react('⏭');
                         }
