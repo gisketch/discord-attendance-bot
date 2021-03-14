@@ -323,10 +323,10 @@ module.exports = {
                 if (args[1] === 'art') {
                     if (args[2]) {
                         const artFiltered = artResult[artPage - 1].filter((r) =>
-                            console.log(r.replace(/\D/g, ''))
+                            r.replace(/\D/g, '')
                         );
                         if (args[2] === '2d') {
-                            console.log('logged');
+                            console.log(artFiltered);
                         }
                     }
 
