@@ -323,13 +323,21 @@ module.exports = {
                 if (args[1] === 'art') {
                     if (args[2]) {
                         let filter = '';
-
+                        if (
+                            artResult[artPage - 1] !== undefined ||
+                            artResult[artPage - 1] !== []
+                        ) {
+                            artResult[artPage - 1] = artResult[
+                                artPage - 1
+                            ].map((r) => r.replace(/\D/g, ''));
+                        } else {
+                            artResult[artPage - 1] = ['None'];
+                        }
                         if (args[2] === '2d') {
                             filter = '2D Artist';
                         }
 
-                        artResult[artPage - 1] = uniqArt
-                            .map((e) => e.replace(/\D/g, ''))
+                        artResult[artPage - 1] = artResult[artPage - 1]
                             .filter((e) =>
                                 message.guild.roles.cache
                                     .find((r) => r.name === filter)
@@ -342,19 +350,20 @@ module.exports = {
                         // .members.map((m) => `<@${m.user.id}>`);
                     }
 
-                    console.log(typeof artResult[artPage - 1]);
+                    console.log(artResult[artPage - 1]);
+
                     attendanceEmbed
                         .setTitle(
                             `Art Team Attendance Check for ${args[0]}-2021`
                         )
                         .addFields({
                             name: `✅ Active Users (${artActiveLength})`,
-                            value: `--------\n${
+                            value: `----\n${
                                 artResult[artPage - 1] === undefined ||
                                 artResult[artPage - 1] === []
                                     ? 'None'
                                     : artResult[artPage - 1].join(`\n`)
-                            } \n--------\n`,
+                            } \n----\n`,
                         })
                         .addFields({
                             name: `❌Inactive Users (${artInactiveLength})`,
