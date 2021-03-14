@@ -351,6 +351,9 @@ module.exports = {
                     }
 
                     console.log(artResult[artPage - 1]);
+                    console.log(artResult[artPage - 1] === []);
+                    console.log(artResult[artPage - 1] === undefined);
+                    console.log(artResult[artPage - 1] === null);
 
                     attendanceEmbed
                         .setTitle(
