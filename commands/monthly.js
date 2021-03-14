@@ -332,14 +332,12 @@ module.exports = {
                             filter = '2D Artist';
                         }
 
-                        artResult[artPage - 1] = artResult[
-                            artPage - 1
-                        ].filter((e) =>
-                            e.includes(
+                        artResult[artPage - 1] = artResult[artPage - 1].filter(
+                            (e) =>
                                 message.guild.roles.cache
                                     .find((r) => r.name === filter)
                                     .members.map((m) => m.user.id)
-                            )
+                                    .includes(e)
                         );
 
                         console.log(artResult[artPage - 1]);
