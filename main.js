@@ -4,7 +4,7 @@ require('dotenv').config();
 const cron = require('cron');
 const client = new Discord.Client({
     partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
-    disableEveryone: False,
+    disableEveryone: false,
 });
 
 //Commands Startup
